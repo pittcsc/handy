@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'members/dispatch'
-
-  get 'members_controller/dispatch'
+  get 'members/text_dispatch'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
