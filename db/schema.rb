@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916023724) do
+ActiveRecord::Schema.define(version: 20140916205149) do
 
   create_table "events", force: true do |t|
     t.string "name"
@@ -23,5 +23,7 @@ ActiveRecord::Schema.define(version: 20140916023724) do
     t.string "email"
     t.string "phone", limit: 10
   end
+
+  add_index "members", ["phone"], name: "index_members_on_phone", using: :btree
 
 end
