@@ -1,6 +1,9 @@
 require 'twilio-ruby'
 
 class MembersController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
+
   def text_dispatch
     @client = Twilio::REST::Client.new Twilio_Keys[:account_sid], Twilio_Keys[:auth_token]
 
