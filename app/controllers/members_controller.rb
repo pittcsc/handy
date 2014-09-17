@@ -13,17 +13,23 @@ class MembersController < ApplicationController
     member = Member.find_by(phone: number)
 
     if member
-      body = "Welcome back, " + member.name
+      if member.email
+        body = "Welcome back, " + member.nick + "!"
+      else
+        member.email = params[:Body]
+        body = "Okay " + member.nick + ", your email is " + member.email + ". Thanks!"
+        member.save
+      end
     else
       name = params[:Body]
       member = Member.create(name: name, phone: number)
       member.save
-      body = "Welcome to the system, " + name + "!"
+      body = "Welcome to the system, " + member.nick + "! Please respond with your email address."
     end
 
     @client.messages.create(
       :from => '+12162424434',
-      :to => '+14407817648',
+      :to => '+1' + number,
       :body => body
     )
   end
