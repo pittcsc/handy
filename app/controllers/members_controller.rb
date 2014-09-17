@@ -14,7 +14,14 @@ class MembersController < ApplicationController
 
     if member
       if member.email
-        body = "Welcome back, " + member.nick + "!"
+        if CurrentEvent.first
+          event = Event.find(CurrentEvent.first.event_id)
+          body = "Welcome to " + event.name + "!"
+          attend = Attendance.create(member_id: member.id, event_id: event.id)
+          attend.save
+        else
+          body = "No event at the moment."
+        end
       else
         member.email = params[:Body]
         body = "Okay " + member.nick + ", your email is " + member.email + ". Thanks!"
