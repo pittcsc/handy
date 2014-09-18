@@ -26,6 +26,12 @@ class MembersController < ApplicationController
         member.email = params[:Body]
         body = "Okay " + member.nick + ", your email is " + member.email + ". Thanks!"
         member.save
+        if CurrentEvent.first
+          event = Event.find(CurrentEvent.first.event_id)
+          body += "  You've also been marked as here for " + event.name + "."
+          attend = Attendance.create(member_id: member.id, event_id: event.id)
+          attend.save
+        end
       end
     else
       name = params[:Body]
