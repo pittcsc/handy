@@ -2,11 +2,15 @@ require 'twilio-ruby'
 
 class MembersController < ApplicationController
 
+  # Disable XSRF protection to allow the Twilio API to make POST requests on the server
   skip_before_action :verify_authenticity_token
 
   def text_dispatch
     @client = Twilio::REST::Client.new Twilio_Keys[:account_sid], Twilio_Keys[:auth_token]
 
+    # I initially set up phone numbers as length 10 strings. Twilio adds a "+1"
+    # in front of every number.  Which seems unnecessary to store since in the US,
+    # where we're using this, it's universal
     number = params[:From][2..-1]
     body = ""
 

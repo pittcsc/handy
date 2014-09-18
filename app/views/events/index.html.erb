@@ -1,0 +1,17 @@
+<html>
+<head>
+	<title>Events</title>
+</head>
+<body>
+<h1>Books and such</h1>
+<table>
+<% @events.each do |event| %>
+<tr>
+	<td><%= event.name %></td>
+	<td><%= event.date %></td>
+</tr>
+<% end %>
+</table>
+<%= link_to "Create event", new_event_url %>
+</body>
+</html>
