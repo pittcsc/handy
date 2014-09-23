@@ -18,8 +18,8 @@ class MembersController < ApplicationController
 
     if member
       if member.email
-        if CurrentEvent.first
-          event = Event.find(CurrentEvent.first.event_id)
+        if Event.find_by_current true
+          event = Event.find_by_current(true)
           body = "Welcome to " + event.name + "!"
           attend = Attendance.create(member_id: member.id, event_id: event.id)
           attend.save
@@ -30,8 +30,8 @@ class MembersController < ApplicationController
         member.email = params[:Body]
         body = "Okay " + member.first_name + ", your email is " + member.email + ". Thanks!"
         member.save
-        if CurrentEvent.first
-          event = Event.find(CurrentEvent.first.event_id)
+        if Event.find_by_current true
+          event = Event.find_by_current(true)
           body += "  You've also been marked as here for " + event.name + "."
           attend = Attendance.create(member_id: member.id, event_id: event.id)
           attend.save
