@@ -11,7 +11,7 @@ class MembersController < ApplicationController
     # I initially set up phone numbers as length 10 strings. Twilio adds a "+1"
     # in front of every number.  Which seems unnecessary to store since in the US,
     # where we're using this, it's universal
-    number = params[:From][2..-1]
+    number = params[:From]
     body = ""
 
     member = Member.find_by(phone: number)
@@ -46,7 +46,7 @@ class MembersController < ApplicationController
 
     @client.messages.create(
       :from => '+12162424434',
-      :to => '+1' + number,
+      :to => number,
       :body => body
     )
   end
