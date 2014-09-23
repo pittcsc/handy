@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  # get 'members/text_dispatch'
   post '/text', to: 'members#text_dispatch'
-  resources :events
+
+  resources :events do
+    member do
+      post :make_current
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

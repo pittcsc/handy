@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  helper_method :make_current
+
   def index
     @events = Event.all
   end
@@ -44,6 +46,15 @@ class EventsController < ApplicationController
   def destroy
     event_id = params[:id]
     Event.destroy(event_id)
+
+    redirect_to events_url
+  end
+
+  def make_current
+    if event = Event.find(params[:id])
+      event.current = true;
+      event.save
+    end
 
     redirect_to events_url
   end

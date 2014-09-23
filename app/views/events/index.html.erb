@@ -9,6 +9,7 @@
 <tr>
 	<td><%= event.name %></td>
 	<td><%= event.date %></td>
+	<td><%= button_to "Mark as current", make_current_event_path(event) %></td>
         <td><%= link_to "Edit event", edit_event_url(event.id) %></td>
 	<td><%= button_to "Remove event", event, :method=>:delete, :class=>:destroy %></td>
 </tr>
