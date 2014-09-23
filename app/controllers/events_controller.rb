@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
-  helper_method :make_current
-  helper_method :remove_current
+  before_action :set_event, only: [:make_current, :remove_current]
 
   def index
     @events = Event.all
@@ -52,20 +51,19 @@ class EventsController < ApplicationController
   end
 
   def make_current
-    if event = Event.find(params[:id])
-      event.current = true;
-      event.save
-    end
+    @event.update!(current: true)
 
     redirect_to events_url
   end
 
   def remove_current
-    if event = Event.find(params[:id])
-      event.current = false;
-      event.save
-    end
+    @event.update!(current: false)
 
     redirect_to events_url
   end
+
+  private
+    def set_event
+      @event = Event.find(params[:id])
+    end
 end
