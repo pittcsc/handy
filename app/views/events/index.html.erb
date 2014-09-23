@@ -3,12 +3,14 @@
 	<title>Events</title>
 </head>
 <body>
-<h1>Books and such</h1>
+<h1>Events and such</h1>
 <table>
 <% @events.each do |event| %>
 <tr>
 	<td><%= event.name %></td>
 	<td><%= event.date %></td>
+        <td><%= link_to "Edit event", edit_event_url(event.id) %></td>
+	<td><%= button_to "Remove event", event, :method=>:delete, :class=>:destroy %></td>
 </tr>
 <% end %>
 </table>

@@ -1,0 +1,12 @@
+<html>
+<head>
+	<title>Edit the current event</title>
+</head>
+<body>
+<h1>Edit current event</h1>
+<%= form_for @event, url: {action: "update"} do |event_form| %>
+<%= select_tag(:id, options_for_select(@event_list.collect {|a| [a.name, a.id]})) %>
+<%= event_form.submit :submit %>
+<% end %>
+</body>
+</html
