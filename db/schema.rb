@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923194811) do
+ActiveRecord::Schema.define(version: 20140923200442) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140923194811) do
   create_table "members", force: true do |t|
     t.string "name"
     t.string "email"
-    t.string "phone", limit: 10
+    t.string "phone", null: false
   end
 
   add_index "members", ["phone"], name: "index_members_on_phone", using: :btree
