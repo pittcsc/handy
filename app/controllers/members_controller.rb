@@ -28,7 +28,7 @@ class MembersController < ApplicationController
         end
       else
         member.email = params[:Body]
-        body = "Okay " + member.nick + ", your email is " + member.email + ". Thanks!"
+        body = "Okay " + member.first_name + ", your email is " + member.email + ". Thanks!"
         member.save
         if CurrentEvent.first
           event = Event.find(CurrentEvent.first.event_id)
@@ -41,7 +41,7 @@ class MembersController < ApplicationController
       name = params[:Body]
       member = Member.create(name: name, phone: number)
       member.save
-      body = "Welcome to the system, " + member.nick + "! Please respond with your email address."
+      body = "Welcome to the system, " + member.first_name + "! Please respond with your email address."
     end
 
     @client.messages.create(
