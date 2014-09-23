@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       post :make_current
+      post :remove_current
     end
   end
 
