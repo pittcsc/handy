@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @current = Event.find_by_current true
   end
 
   def new
@@ -27,6 +28,9 @@ class EventsController < ApplicationController
   end
 
   def edit
+    event_id = params[:id]
+
+    @event = Event.find(event_id)
   end
 
   def update

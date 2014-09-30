@@ -4,6 +4,9 @@
 </head>
 <body>
 <h1>Events and such</h1>
+<% if @current %>
+<strong>Current: </strong><%= @current.name %>
+<% end %>
 <table>
 <% @events.each do |event| %>
 <tr>
