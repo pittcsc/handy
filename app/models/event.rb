@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   before_save :ensure_one_current
-  has_many :attendance
+  has_many :attendances
 
   def self.current
     find_by_current true

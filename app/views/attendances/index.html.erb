@@ -1,6 +1,6 @@
-<% @events.each do |event| %>
+<% @attendances.each do |attendance| %>
 
-<%= event.name %>
+<%= Member.find(attendance.member_id).name %> was at <%= Event.find(attendance.event_id).name %>
 <br>
 
 <% end %>

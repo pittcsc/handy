@@ -6,9 +6,9 @@ Rails.application.routes.draw do
       post :make_current
       post :remove_current
     end
-  end
 
-  resources :attendances
+    resources :attendances
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
