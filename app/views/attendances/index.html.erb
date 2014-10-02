@@ -1,6 +1,8 @@
+<h2><%= @event.name %> Attendance</h2>
+<ul>
 <% @attendances.each do |attendance| %>
-
-<%= Member.find(attendance.member_id).name %> was at <%= Event.find(attendance.event_id).name %>
-<br>
-
+<li>
+<%= Member.find(attendance.member_id).name %>
+</li>
 <% end %>
+</ul>
