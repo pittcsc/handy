@@ -20,11 +20,11 @@ class MembersController < ApplicationController
       if member.email
         event = Event.find_by_current true
         if event
-          if Attendance.exists?(:event_id => event.id, :member_id => member.id)
+          if Attendance.exists?(:event => event, :member => member)
             body = "You're already marked as present for " + event.name + "."
 	  else
             body = "Welcome to " + event.name + "!"
-            attend = Attendance.create(member_id: member.id, event_id: event.id)
+            attend = Attendance.create(member: member, event: event)
             attend.save
           end
         else
@@ -37,7 +37,7 @@ class MembersController < ApplicationController
         if Event.find_by_current true
           event = Event.find_by_current(true)
           body += "  You've also been marked as here for " + event.name + "."
-          attend = Attendance.create(member_id: member.id, event_id: event.id)
+          attend = Attendance.create(member: member, event: event)
           attend.save
         end
       end
