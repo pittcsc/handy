@@ -34,11 +34,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    event_id = params[:id]
-    name = params[:name]
-    date = params[:date]
+    event_params = params[:event]
+    name = event_params[:name]
+    date = event_params[:date]
 
-    event = Event.find(event_id)
+    event = Event.find(params[:id])
+
     event.name = name
     event.date = date
 

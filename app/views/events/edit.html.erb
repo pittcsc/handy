@@ -4,10 +4,11 @@
 </head>
 <body>
 <h1>Edit event</h1>
-<%= form_for @event do |event_form| %>
+<%= form_for @event, url: {action: "update"} do |event_form| %>
 
 Name: <%= event_form.text_field :name %><br />
 Date: <%= event_form.date_field :date %><br />
+<%= event_form.submit :submit %>
 <% end %>
 </body>
 </html>
