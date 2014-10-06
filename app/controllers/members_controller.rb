@@ -18,11 +18,15 @@ class MembersController < ApplicationController
 
     if member
       if member.email
-        if Event.find_by_current true
-          event = Event.find_by_current(true)
-          body = "Welcome to " + event.name + "!"
-          attend = Attendance.create(member_id: member.id, event_id: event.id)
-          attend.save
+        event = Event.find_by_current true
+        if event
+          if Attendance.exists?(:event_id => event.id, :member_id => member.id)
+            body = "You're already marked as present for " + event.name + "."
+	  else
+            body = "Welcome to " + event.name + "!"
+            attend = Attendance.create(member_id: member.id, event_id: event.id)
+            attend.save
+          end
         else
           body = "No event at the moment."
         end
@@ -45,7 +49,7 @@ class MembersController < ApplicationController
     end
 
     @client.messages.create(
-      :from => '+12162424434',
+      :from => Twilio_Keys[:phone_number],
       :to => number,
       :body => body
     )
