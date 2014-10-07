@@ -14,11 +14,15 @@ class MembersController < ApplicationController
     if member = Member.find_by(phone: number)
       if member.email
         if event = Event.current
-          if Attendance.exists?(:event => event, :member => member)
-            body = "You're already marked as present for #{event.name}."
-	  else
-            body = "Welcome to #{event.name}!"
-            attend = Attendance.create(member: member, event: event)
+          if params[:Body] != event.token
+            body = "Sorry, invalid event code."
+          else
+            if Attendance.exists?(:event => event, :member => member)
+              body = "You're already marked as present for #{event.name}."
+            else
+              body = "Welcome to #{event.name}!"
+              attend = Attendance.create(member: member, event: event)
+            end
           end
         else
           body = "No event at the moment."

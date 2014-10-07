@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923200442) do
+ActiveRecord::Schema.define(version: 20141007164523) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20140923200442) do
     t.string  "name"
     t.date    "date"
     t.boolean "current", default: false, null: false
+    t.string  "token",                   null: false
   end
+
+  add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree
 
   create_table "members", force: true do |t|
     t.string "name"

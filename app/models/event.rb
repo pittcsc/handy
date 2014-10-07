@@ -2,6 +2,10 @@ class Event < ActiveRecord::Base
   before_save :ensure_one_current
   has_many :attendances
 
+  before_validation :generate_token, on: :create
+
+  validates :token, presence: true, uniqueness: true
+
   def self.current
     find_by_current true
   end
@@ -13,4 +17,7 @@ class Event < ActiveRecord::Base
       end
     end
 
+    def generate_token
+      self.token = SecureRandom.hex(3)
+    end
 end

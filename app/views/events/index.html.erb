@@ -12,6 +12,7 @@
 <tr>
 	<td><%= event.name %></td>
 	<td><%= event.date %></td>
+	<td>Token: <%= event.token %></td>
 	<td><%= link_to "Attendance", [event, :attendances] %></td>
 	<% if event.current %>
 	<td><%= button_to "Mark as done", remove_current_event_path(event) %></td>
