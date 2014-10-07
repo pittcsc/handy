@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @current = Event.find_by_current true
+    @current = Event.current
   end
 
   def new
