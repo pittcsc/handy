@@ -16,7 +16,6 @@ class EventsController < ApplicationController
     date = event[:date]
 
     event = Event.create(name: name, date: date)
-    event.save
 
     redirect_to events_url
   end

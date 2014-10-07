@@ -15,8 +15,6 @@ class AttendancesController < ApplicationController
 
     attendance = Attendance.create(event_id: event_id, member_id: member_id)
 
-    event.save
-
     # Redirect to specific attendance page
     redirect_to events_url
   end
