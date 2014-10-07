@@ -21,9 +21,9 @@ class MembersController < ApplicationController
         event = Event.find_by_current true
         if event
           if Attendance.exists?(:event => event, :member => member)
-            body = "You're already marked as present for " + event.name + "."
+            body = "You're already marked as present for #{event.name}."
 	  else
-            body = "Welcome to " + event.name + "!"
+            body = "Welcome to #{event.name}!"
             attend = Attendance.create(member: member, event: event)
             attend.save
           end
@@ -32,11 +32,12 @@ class MembersController < ApplicationController
         end
       else
         member.email = params[:Body]
-        body = "Okay " + member.first_name + ", your email is " + member.email + ". Thanks!"
+        body = "Okay #{member.first_name}, your email is #{member.email}. Thanks!"
         member.save
         if Event.find_by_current true
           event = Event.find_by_current(true)
           body += "  You've also been marked as here for " + event.name + "."
+          body += "  You've also been marked as here for #{event.name}."
           attend = Attendance.create(member: member, event: event)
           attend.save
         end
@@ -45,7 +46,7 @@ class MembersController < ApplicationController
       name = params[:Body]
       member = Member.create(name: name, phone: number)
       member.save
-      body = "Welcome to the system, " + member.first_name + "! Please respond with your email address."
+      body = "Welcome to the system, #{member.first_name}! Please respond with your email address."
     end
 
     @client.messages.create(
