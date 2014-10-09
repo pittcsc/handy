@@ -14,11 +14,11 @@ class MembersController < ApplicationController
     if member = Member.find_by(phone: number)
       if member.email
         if event = Event.current
-          if params[:Body] != event.token
-            body = "Sorry, invalid event code."
-          else
-            if Attendance.exists?(:event => event, :member => member)
-              body = "You're already marked as present for #{event.name}."
+          if Attendance.exists?(:event => event, :member => member)
+            body = "You're already marked as present for #{event.name}."
+          else  
+            if params[:Body] != event.token
+              body = "Sorry, invalid event code."
             else
               body = "Welcome to #{event.name}!"
               attend = Attendance.create(member: member, event: event)
@@ -32,7 +32,6 @@ class MembersController < ApplicationController
         body = "Okay #{member.first_name}, your email is #{member.email}. Thanks!"
         member.save
         if event = Event.current
-          body += "  You've also been marked as here for " + event.name + "."
           body += "  You've also been marked as here for #{event.name}."
           attend = Attendance.create(member: member, event: event)
         end
