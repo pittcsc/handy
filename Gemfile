@@ -29,10 +29,6 @@ group :development do
   gem 'capistrano-rails', require: false
 end
 
-gem 'twilio-ruby'
-gem 'resque'
-gem 'bootstrap-sass'
-
 group :production do
   gem 'unicorn'
 end
