@@ -21,7 +21,7 @@ class InboundMessageProcessor
 
   private
     def client
-      @client ||= Twilio::REST::Client.new Twilio_Keys[:account_sid], Twilio_Keys[:auth_token]
+      @client ||= Twilio::REST::Client.new
     end
 
     def member
@@ -60,7 +60,7 @@ class InboundMessageProcessor
 
     def respond(response)
       client.messages.create(
-        from: Twilio_Keys[:phone_number],
+        from: Rails.configuration.x.twilio[:phone_number],
         to: phone_number,
         body: @body
       )
