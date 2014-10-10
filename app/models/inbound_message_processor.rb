@@ -20,10 +20,6 @@ class InboundMessageProcessor
   end
 
   private
-    def client
-      @client ||= Twilio::REST::Client.new
-    end
-
     def member
       @member ||= Member.find_by(phone: @phone_number)
     end
@@ -59,10 +55,6 @@ class InboundMessageProcessor
     end
 
     def respond(response)
-      client.messages.create(
-        from: Rails.configuration.x.twilio[:phone_number],
-        to: phone_number,
-        body: @body
-      )
+      DeliveryJob.perform_later(phone_number, response)
     end
 end
