@@ -8,6 +8,7 @@
 
 Name: <%= event_form.text_field :name %><br />
 Date: <%= event_form.date_field :date %><br />
+<%= event_form.submit "Create event", class: 'btn btn-primary' %>
 <% end %>
 </body>
 </html>
