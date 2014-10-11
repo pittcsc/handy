@@ -9,6 +9,14 @@ set :scm, :git
 set :repo_url, 'git@github.com:Pitt-CSC/handy.git'
 set :branch, 'master'
 
+# Ruby
+set :rbenv_type, :system
+set :rbenv_ruby, '2.1.2'
+set :rbenv_custom_path, '/opt/rbenv'
+
+# Rails
+set :linked_files, %w(config/database.yml config/secrets.yml config/twilio.yml)
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -19,13 +27,4 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
 end

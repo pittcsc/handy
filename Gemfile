@@ -26,6 +26,7 @@ group :development do
   gem 'spring'
 
   # Deployment
+  gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails', require: false
 end
 
