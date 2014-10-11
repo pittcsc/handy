@@ -55,6 +55,6 @@ class InboundMessageProcessor
     end
 
     def respond(response)
-      DeliveryJob.perform_later(phone_number, response)
+      Sms::DeliveryJob.perform_later(@phone_number, response)
     end
 end
