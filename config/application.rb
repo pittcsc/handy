@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CSCAttendance
+module Handy
   class Application < Rails::Application
     config.x.twilio = config_for(:twilio).symbolize_keys
   end
