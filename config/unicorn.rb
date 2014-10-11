@@ -1,5 +1,5 @@
 preload_app true
-worker_processes 2
+worker_processes 1
 timeout 30
 
 check_client_connection true
