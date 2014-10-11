@@ -6,8 +6,8 @@ check_client_connection true
 
 listen '/u/apps/handy/shared/sockets/unicorn.sock', backlog: 2048
 pid '/u/apps/handy/shared/pids/unicorn.pid'
-stderr_path '/u/apps/bcx/shared/log/unicorn.log'
-stdout_path '/u/apps/bcx/shared/log/unicorn.log'
+stderr_path '/u/apps/handy/shared/log/unicorn.log'
+stdout_path '/u/apps/handy/shared/log/unicorn.log'
 
 working_directory '/u/apps/handy/current'
 
