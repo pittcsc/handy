@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post '/text', to: 'members#text_dispatch'
+  post '/text', to: 'sms/inbound_messages#create'
 
   resources :events do
     member do
