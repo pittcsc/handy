@@ -8,6 +8,6 @@ Bundler.require(*Rails.groups)
 
 module CSCAttendance
   class Application < Rails::Application
-    config.x.twilio = config_for(:twilio)
+    config.x.twilio = config_for(:twilio).symbolize_keys
   end
 end
