@@ -32,7 +32,7 @@ class InboundMessageProcessor
       @body.strip.downcase
     end
 
-    def create_attendance_for_event
+    def create_attendance_for_current_event
       if event
         unless Attendance.exists?(event: event, member: member)
           Attendance.create(member: member, event: event)
