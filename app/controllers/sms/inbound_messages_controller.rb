@@ -1,4 +1,4 @@
-class InboundMessagesController < ApplicationController
+class Sms::InboundMessagesController < ApplicationController
 
   # Disable XSRF protection to allow the Twilio API to make POST requests on the server
   skip_before_action :verify_authenticity_token
