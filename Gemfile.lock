@@ -17,6 +17,12 @@ GIT
       activesupport (>= 4.0)
       sprockets (~> 2.8)
 
+GIT
+  remote: git://github.com/sparklemotion/sysloglogger.git
+  revision: cd9c466069b84a2ea97d67b3329d2f87fe72d57d
+  specs:
+    sysloglogger (2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -223,6 +229,7 @@ DEPENDENCIES
   sass-rails!
   spring
   sprockets-rails!
+  sysloglogger (= 2.0)!
   turbolinks
   twilio-ruby
   uglifier (>= 1.3.0)

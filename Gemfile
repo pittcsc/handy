@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0.beta2'
 gem 'mysql2'
 
-# Rails Extensions
+# Plugins
 gem 'turbolinks'
 
 # Assets
@@ -21,6 +21,9 @@ gem 'resque-scheduler'
 
 # SMS
 gem 'twilio-ruby'
+
+# Logging
+gem 'sysloglogger', '2.0', github: 'sparklemotion/sysloglogger'
 
 group :development do
   gem 'spring'
