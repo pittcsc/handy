@@ -17,6 +17,7 @@ set :rbenv_custom_path, '/opt/rbenv'
 
 # Rails
 set :linked_files, %w(config/database.yml config/secrets.yml config/twilio.yml)
+set :linked_dirs, %w(log)
 
 namespace :deploy do
   desc 'Restart application'
