@@ -34,7 +34,7 @@ class InboundMessageProcessor
     def create_attendance_for_current_event
       if event
         unless Attendance.exists?(event: event, member: member)
-          Attendance.create(member: member, event: event)
+          Attendance.create!(member: member, event: event)
         end
 
         respond "Welcome to #{event.name}!"
