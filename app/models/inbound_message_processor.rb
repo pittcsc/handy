@@ -45,7 +45,7 @@ class InboundMessageProcessor
     end
 
     def update_member_email
-      Member.update!(email: @body)
+      member.update!(email: @body)
       respond "Thanks, #{member.first_name}! Your email was updated to #{@body}."
     end
 
