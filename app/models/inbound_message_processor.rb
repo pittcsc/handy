@@ -1,7 +1,6 @@
 require 'twilio-ruby'
 
 class InboundMessageProcessor
-
   def initialize(phone_number, body)
     @phone_number = phone_number
     @body = body
