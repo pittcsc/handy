@@ -5,6 +5,7 @@ class Sms::InboundMessagesController < ApplicationController
 
   def create
     InboundMessageProcessor.new(phone_number, body).process
+    render nothing: true
   end
 
   private
@@ -16,4 +17,3 @@ class Sms::InboundMessagesController < ApplicationController
       params[:Body]
     end
 end
-

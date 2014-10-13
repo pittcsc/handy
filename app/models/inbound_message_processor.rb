@@ -17,8 +17,6 @@ class InboundMessageProcessor
     else
       create_member
     end
-
-    render nothing: true
   end
 
   private
