@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :registrations, dependent: :destroy
 
   before_validation :generate_token, on: :create
