@@ -44,4 +44,7 @@ ActiveRecord::Schema.define(version: 20141014012505) do
     t.datetime "updated_at",                null: false
   end
 
+  add_index "registrations", ["event_id"], name: "index_registrations_on_event_id", using: :btree
+  add_index "registrations", ["phone_number"], name: "index_registrations_on_phone_number", using: :btree
+
 end
