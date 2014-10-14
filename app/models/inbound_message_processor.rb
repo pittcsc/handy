@@ -3,18 +3,14 @@ require 'twilio-ruby'
 class InboundMessageProcessor
   def initialize(phone_number, body)
     @phone_number = phone_number
-    @body = body
+    @body = body.strip
   end
 
   def process
     if member
-      if member.email
-        create_attendance_for_current_event
-      else
-        update_member_email
-      end
+      process_attendance
     else
-      create_member
+      process_registration
     end
   end
 
@@ -24,33 +20,50 @@ class InboundMessageProcessor
     end
 
     def event
-      @event ||= Event.where(token: event_token).current
+      @event ||= Event.where(token: @body.downcase).current
     end
 
-    def event_token
-      @body.strip.downcase
+    def registration
+      @registration ||= Registration.find_by(phone_number: @phone_number)
     end
 
-    def create_attendance_for_current_event
+    def process_attendance
       if event
-        unless Attendance.exists?(event: event, member: member)
-          Attendance.create!(member: member, event: event)
-        end
-
-        respond "Welcome to #{event.name}!"
+        event.attendances.find_or_create_by!(member: member)
+        respond "Thanks, #{member.first_name}. You're checked in for #{event.name}."
       else
-        respond "Invalid event code."
+        reject_invalid_event_token
       end
     end
 
-    def update_member_email
-      member.update!(email: @body)
-      respond "Thanks, #{member.first_name}! Your email was updated to #{@body}."
+    def process_registration
+      if registration
+        continue_existing_registration
+      elsif event
+        start_new_registration
+      else
+        reject_invalid_event_token
+      end
     end
 
-    def create_member
-      Member.create!(phone: @phone_number, name: @body)
-      respond "Hey there, #{member.first_name}!  Welcome to Handy.  Please respond with your email address."
+    def start_new_registration
+      event.registrations.create!(phone_number: @phone_number)
+      respond "It looks like this is your first time checking in. What's your name?"
+    end
+
+    def continue_existing_registration
+      if registration.name.blank?
+        registration.update!(name: @body)
+        respond "Thanks! One last question: what's your email address?"
+      else
+        registration.update!(email_address: @body)
+        registration.complete
+        respond "All set! You're checked in for #{registration.event.name}."
+      end
+    end
+
+    def reject_invalid_event_token
+      respond "Oops! That doesn't look like a valid event code."
     end
 
     def respond(response)

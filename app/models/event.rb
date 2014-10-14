@@ -1,10 +1,11 @@
 class Event < ActiveRecord::Base
-  before_save :ensure_one_current
   has_many :attendances
+  has_many :registrations, dependent: :destroy
 
   before_validation :generate_token, on: :create
-
   validates :token, presence: true, uniqueness: true
+
+  before_save :ensure_one_current
 
   def self.current
     find_by_current true
