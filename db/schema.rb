@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014012505) do
+ActiveRecord::Schema.define(version: 20141014143436) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id", limit: 4
     t.integer "event_id",  limit: 4
   end
+
+  add_index "attendances", ["event_id", "member_id"], name: "index_attendances_on_event_id_and_member_id", unique: true, using: :btree
 
   create_table "events", force: true do |t|
     t.string  "name",    limit: 255
