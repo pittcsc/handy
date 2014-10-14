@@ -11,28 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007164523) do
+ActiveRecord::Schema.define(version: 20141014012505) do
 
   create_table "attendances", force: true do |t|
-    t.integer "member_id"
-    t.integer "event_id"
+    t.integer "member_id", limit: 4
+    t.integer "event_id",  limit: 4
   end
 
   create_table "events", force: true do |t|
-    t.string  "name"
+    t.string  "name",    limit: 255
     t.date    "date"
-    t.boolean "current", default: false, null: false
-    t.string  "token",                   null: false
+    t.boolean "current", limit: 1,   default: false, null: false
+    t.string  "token",   limit: 255,                 null: false
   end
 
   add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree
 
   create_table "members", force: true do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone", null: false
+    t.string "name",  limit: 255
+    t.string "email", limit: 255
+    t.string "phone", limit: 255, null: false
   end
 
   add_index "members", ["phone"], name: "index_members_on_phone", using: :btree
+
+  create_table "registrations", force: true do |t|
+    t.integer  "event_id",      limit: 4,   null: false
+    t.string   "phone_number",  limit: 255, null: false
+    t.string   "name",          limit: 255
+    t.string   "email_address", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
 end
