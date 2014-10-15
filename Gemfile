@@ -16,7 +16,7 @@ gem 'bootstrap-sass'
 
 # Background Jobs
 gem 'redis-rails'
-gem 'resque'
+gem 'resque-pool'
 gem 'resque-scheduler'
 
 # SMS
