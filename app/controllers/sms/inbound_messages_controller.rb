@@ -4,16 +4,15 @@ class Sms::InboundMessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    InboundMessageProcessor.new(phone_number, body).process
+    TextMessage.create(text_message_attributes).process
     render nothing: true
   end
 
   private
-    def phone_number
-      params[:From]
-    end
-
-    def body
-      params[:Body]
+    def text_message_attributes
+      {
+        phone_number: params[:From],
+        body: params[:Body]
+      }
     end
 end
