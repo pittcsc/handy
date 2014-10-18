@@ -1,19 +1,18 @@
 class Sms::InboundMessagesController < ApplicationController
-
-  # Disable XSRF protection to allow the Twilio API to make POST requests on the server
+  # Disable XSRF protection to allow Twilio to make POST requests.
   skip_before_action :verify_authenticity_token
 
   def create
-    InboundMessageProcessor.new(phone_number, body).process
-    render nothing: true
+    TextMessage.create!(text_message_attributes).enqueue_for_processing
+
+    head :ok
   end
 
   private
-    def phone_number
-      params[:From]
-    end
-
-    def body
-      params[:Body]
+    def text_message_attributes
+      {
+        phone_number: params[:From],
+        body: params[:Body].strip
+      }
     end
 end
