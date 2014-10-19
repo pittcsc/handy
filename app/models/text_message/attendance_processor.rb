@@ -8,8 +8,8 @@ class TextMessage
 
     private
       def create_attendance(event)
-        event.attendances.find_or_create_by!(member: text_message.member)
-        respond "Thanks, #{@text_message.member.first_name}. You're checked in for #{event.name}."
+        event.attendances.find_or_create_by!(member: member)
+        respond "Thanks, #{member.first_name}. You're checked in for #{event.name}."
       end
   end
 end
