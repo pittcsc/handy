@@ -2,7 +2,7 @@ class AttendancesController < ApplicationController
   before_action :set_event
 
   def index
-    @attendances = @event.attendances.all
+    @attendances = @event.attendances.preload(:members)
   end
 
   private
