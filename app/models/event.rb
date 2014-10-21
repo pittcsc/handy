@@ -5,6 +5,9 @@ class Event < ActiveRecord::Base
   before_validation :generate_token, on: :create
   validates :token, presence: true, uniqueness: true
 
+  validates :name, presence: true
+  validates :date, presence: true
+
   before_save :ensure_one_current
 
   def self.current
