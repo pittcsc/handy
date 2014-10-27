@@ -1,3 +1,5 @@
+
+
 # This config is valid only for Capistrano 3.1.
 lock '3.2.1'
 
@@ -18,14 +20,15 @@ set :rbenv_custom_path, '/opt/rbenv'
 # Rails
 set :linked_files, %w(config/database.yml config/secrets.yml config/twilio.yml)
 
+# Unicorn
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
+
 namespace :deploy do
+  after :publishing, :restart
+
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
+    invoke 'unicorn:restart'
   end
-
-  after :publishing, :restart
 end

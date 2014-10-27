@@ -31,6 +31,7 @@ group :development do
   # Deployment
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :production do
