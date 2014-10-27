@@ -11,7 +11,7 @@ task 'resque:pool:setup' do
     require Rails.root.join('config/environment')
   end
 
-  # Close DB connections before forking a worker.
+  # Close DB connections. No need for processes to hold open connections.
   Resque.before_fork do
     ActiveRecord::Base.clear_all_connections!
   end
