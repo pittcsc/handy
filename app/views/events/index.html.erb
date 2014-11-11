@@ -1,34 +1,45 @@
 <div class="container">
-<h1>Events and such</h1>
-<% if @current %>
-<strong>Current: </strong><%= @current.name %>
-<% end %>
-<table class="table table-bordered table-striped">
-<tr>
-	<th>Name</th>
-	<th>Date</th>
-	<th>Sign-in Code</th>
-	<th>Edit</th>
-	<th>Current?</th>
-	<th>Remove Event</th>
-	<th>Event Attendance</th>
-</tr>
-<% @events.each do |event| %>
-<tr>
-	<td><%= event.name %></td>
-	<td><%= event.date.strftime("%A, %B %e, %Y") %></td>
-	<td class="monospace"><%= event.token %></td>
-        <td><%= link_to "Edit event", edit_event_url(event.id) %></td>
-	<% if event.current %>
-	<td><%= button_to "Mark as done", remove_current_event_path(event) %></td>
-	<% else %>
-	<td><%= button_to "Mark as current", make_current_event_path(event) %></td>
-	<% end %>
-	<td><%= button_to "Remove event", event, :method=>:delete, :class=>:destroy %></td>
-	<td><%= link_to "Attendance", [event, :attendances] %></td>
-</tr>
-<% end %>
-</table>
+  <h1>Events and such</h1>
 
-<%= link_to "Create event", new_event_url %>
+  <p>
+    <strong>Phone number:</strong> <%= Rails.configuration.x.twilio[:phone_number] %>
+  </p>
+
+  <% if @current %>
+    <p>
+      <strong>Current event: </strong><%= @current.name %>
+    </p>
+  <% end %>
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Sign-in Code</th>
+      <th>Edit</th>
+      <th>Current?</th>
+      <th>Remove Event</th>
+      <th>Event Attendance</th>
+    </tr>
+
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
+        <td class="monospace"><%= event.token %></td>
+        <td><%= link_to "Edit event", edit_event_path(event.id) %></td>
+
+        <% if event.current %>
+          <td><%= button_to "Mark as done", remove_current_event_path(event) %></td>
+        <% else %>
+          <td><%= button_to "Mark as current", make_current_event_path(event) %></td>
+        <% end %>
+
+        <td><%= button_to "Remove event", event, method: :delete, class: :destroy %></td>
+        <td><%= link_to "Attendance", event_attendances_path(event) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to "Create event", new_event_path %>
 </div>
