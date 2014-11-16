@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  before_validation :generate_token, on: :create
   has_many :attendances, dependent: :destroy
   has_many :registrations, dependent: :destroy
 
@@ -22,7 +23,7 @@ class Event < ActiveRecord::Base
     end
 
     def generate_token
-      self.token = list.sample(2).join(' ')
+      self.token = Token.generate(2)
     end
 
     def list
