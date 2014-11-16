@@ -1,6 +1,6 @@
 class TextMessage::Processor
   attr_reader :text_message
-  delegate :event, :member, :respond, to: :text_message
+  delegate :member, :respond, to: :text_message
 
   def initialize(text_message)
     @text_message = text_message
