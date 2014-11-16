@@ -1,9 +1,13 @@
 <h2><%= @event.name %> Attendance</h2>
 
-<ul>
-  <% @attendances.each do |attendance| %>
-    <li>
-      <%= attendance.member.name %>
-    </li>
-  <% end %>
-</ul>
+<% if @attendances.any? %>
+  <p><%= pluralize @attendances.count, 'member' %> checked in for this event:</p>
+
+  <ul>
+    <% @attendances.each do |attendance| %>
+      <li><%= attendance.member.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No members have checked in for this event yet.</p>
+<% end %>
