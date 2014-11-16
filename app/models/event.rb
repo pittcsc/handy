@@ -22,6 +22,10 @@ class Event < ActiveRecord::Base
     end
 
     def generate_token
-      self.token = SecureRandom.hex(3)
+      self.token = list.sample(2).join(' ')
     end
+
+    def list
+    	@list ||= File.readlines('nouns.txt').each(&:strip!)
+	end
 end
