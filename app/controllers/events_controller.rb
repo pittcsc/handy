@@ -16,9 +16,6 @@ class EventsController < ApplicationController
     redirect_to events_url
   end
 
-  def show
-  end
-
   def edit
   end
 
