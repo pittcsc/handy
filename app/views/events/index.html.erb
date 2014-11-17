@@ -34,7 +34,7 @@
         <td><%= button_to "Mark as current", make_current_event_path(event) %></td>
       <% end %>
 
-      <td><%= button_to "Remove event", event, method: :delete, class: :destroy %></td>
+	  <td><%= link_to 'Delete event', event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %></td>
       <td><%= link_to "Attendance", event_attendances_path(event) %></td>
     </tr>
   <% end %>
