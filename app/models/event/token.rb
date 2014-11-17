@@ -1,5 +1,5 @@
 class Event::Token
-	DICTIONARY_FILE_PATH = Rails.root.join('share', 'nouns.txt')
+	DICTIONARY_FILE_PATH = Rails.root.join('share', 'dictionary.txt')
 
 	class << self
 		def generate(words)
