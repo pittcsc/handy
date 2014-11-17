@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :make_current, :remove_current]
+  before_action :set_attendances, only: [:show]
 
   def index
     @events = Event.all
@@ -17,6 +18,9 @@ class EventsController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def update
@@ -46,6 +50,10 @@ class EventsController < ApplicationController
   private
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def set_attendances
+      @attendances = Event.find(params[:id]).attendances
     end
 
     def event_params
