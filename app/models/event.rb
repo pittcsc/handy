@@ -22,6 +22,6 @@ class Event < ActiveRecord::Base
     end
 
     def generate_token
-      self.token = SecureRandom.hex(3)
+      self.token = Token.generate(2)
     end
 end
