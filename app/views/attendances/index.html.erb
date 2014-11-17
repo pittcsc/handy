@@ -1,4 +1,5 @@
 <h2><%= @event.name %> Attendance</h2>
+<h4>Event Code: <code><%= @event.token %></code></h4>
 
 <% if @attendances.any? %>
   <p><%= pluralize @attendances.count, 'member' %> checked in for this event:</p>
