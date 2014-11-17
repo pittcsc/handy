@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :make_current, :remove_current]
+  before_action :set_event, except: [:index, :new]
 
   def index
     @events = Event.all
