@@ -14,7 +14,6 @@
   <tr>
     <th>Name</th>
     <th>Date</th>
-    <th>Sign-in Code</th>
     <th>Edit</th>
     <th>Current?</th>
     <th>Remove Event</th>
@@ -25,7 +24,6 @@
     <tr>
       <td><%= event.name %></td>
       <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
-      <td class="monospace"><%= event.token %></td>
       <td><%= link_to "Edit event", edit_event_path(event.id) %></td>
 
       <% if event.current %>
