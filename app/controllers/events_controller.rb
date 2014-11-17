@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @attendances = Event.find(params[:id]).attendances
+    @attendances = @event.attendances
   end
 
   def update
