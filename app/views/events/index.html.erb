@@ -4,9 +4,9 @@
   <strong>Phone number:</strong> <%= Rails.configuration.x.twilio[:phone_number] %>
 </p>
 
-<% if @current %>
+<% if @current_event %>
   <p>
-    <strong>Current event: </strong><%= @current.name %>
+    <strong>Current event: </strong><%= @current_event.name %>
   </p>
 <% end %>
 
@@ -26,7 +26,7 @@
       <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
       <td><%= link_to "Edit event", edit_event_path(event.id) %></td>
 
-      <% if event.current %>
+      <% if event.current? %>
         <td><%= button_to "Mark as done", remove_current_event_path(event) %></td>
       <% else %>
         <td><%= button_to "Mark as current", make_current_event_path(event) %></td>

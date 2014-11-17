@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.order(date: :desc)
-    @current = Event.current
+    @current_event = Event.current
   end
 
   def new
