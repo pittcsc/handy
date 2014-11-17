@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @attendances = @event.attendances
+    @attendances = @event.attendances.includes(:member)
   end
 
   def update
