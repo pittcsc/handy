@@ -23,6 +23,9 @@ gem 'twilio-ruby'
 # Logging
 gem 'sysloglogger', '2.0', github: 'sparklemotion/sysloglogger'
 
+# Encryption
+gem 'bcrypt'
+
 group :development do
   gem 'spring'
 
