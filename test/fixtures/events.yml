@@ -1,0 +1,11 @@
+meeting:
+  name: Meeting
+  date: 2014-11-01
+  current: true
+  token: mayonnaise fragrance
+
+workshop:
+  name: Workshop
+  date: 2014-11-01
+  current: false
+  token: debt cinema

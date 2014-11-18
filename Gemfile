@@ -34,6 +34,10 @@ group :development do
   gem 'capistrano-rails', require: false
 end
 
+group :test do
+  gem 'mocha'
+end
+
 group :production do
   gem 'unicorn'
 end
