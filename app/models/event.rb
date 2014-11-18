@@ -22,6 +22,6 @@ class Event < ActiveRecord::Base
     end
 
     def generate_token
-      self.token = Token.generate(2)
+      self.token = Dictionary.sample(2).join(' ')
     end
 end

@@ -33,7 +33,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'generates token' do
-    Event::Token.stubs(:generate).with(2).returns('grape thing')
+    Dictionary.stubs(:sample).with(2).returns(['grape', 'thing'])
 
     event = Event.create!(name: 'Meeting', date: '2014-11-01')
     assert_equal 'grape thing', event.token
