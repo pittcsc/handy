@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   validates :date, presence: true
 
   def self.current
-    find_by_current true
+    where current: true
   end
 
   private
