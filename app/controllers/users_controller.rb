@@ -4,15 +4,17 @@ class UsersController < ApplicationController
   end
 
   def create
-  	User.create!(params[:user])
-#    user = User.new
-#    user_params = params[:user]
-#
-#    if user.save
-#      redirect_to login_url
-#    else
-#      redirect_to register_url
-#    end
-	redirect_to login_url
+    user = User.create
+
+    user.email = params[:email]
+
+    user.password = params[:password]
+    user.password_confirmation = params[:password_confirmation]
+
+    if user.save
+      redirect_to events_url
+    else
+      redirect_to events_url
+    end
   end
 end
