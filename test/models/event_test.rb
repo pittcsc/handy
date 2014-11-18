@@ -32,8 +32,8 @@ class EventTest < ActiveSupport::TestCase
     assert workshop.current?
   end
 
-  test 'generates token' do
-    Dictionary.stubs(:sample).with(2).returns(['grape', 'thing'])
+  test 'generates token from two random words' do
+    Dictionary.expects(:sample).with(2).returns(['grape', 'thing'])
 
     event = Event.create!(name: 'Meeting', date: '2014-11-01')
     assert_equal 'grape thing', event.token
