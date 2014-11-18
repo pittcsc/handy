@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
     if user = User.authenticate(params[:email], params[:password])
       session[:user_id] = user.id
       redirect_to root_url
-	else
-	  flash.now[:error] = "Invalid email or password."
-	  render :new
-	end
+    else
+      flash.now[:error] = "Invalid email or password."
+      render :new
+    end
   end
 
   def destroy
