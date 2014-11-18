@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117021812) do
+ActiveRecord::Schema.define(version: 20141117025458) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id", limit: 4
@@ -57,8 +57,11 @@ ActiveRecord::Schema.define(version: 20141117021812) do
   end
 
   create_table "users", force: true do |t|
-    t.string "email",           limit: 255, null: false
-    t.string "password_digest", limit: 255, null: false
+    t.string   "email",           limit: 255
+    t.string   "password",        limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest", limit: 255
   end
 
 end
