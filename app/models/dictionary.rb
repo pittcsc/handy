@@ -6,7 +6,7 @@ class Dictionary
       @words ||= File.readlines(WORDS_FILE_PATH).each(&:strip!)
     end
 
-    def sample(count)
+    def sample(count = 1)
       words.sample(count)
     end
   end

@@ -1,16 +1,19 @@
 require 'test_helper'
 
 class DictionaryTest < ActiveSupport::TestCase
-  test 'maintains a list of words' do
+  setup do
     File.stubs(:readlines).with(Dictionary::WORDS_FILE_PATH).returns(%w(grape thing))
+  end
 
+  test 'maintains a list of words' do
     assert_equal %w(grape thing), Dictionary.words
   end
 
-  test 'samples random words' do
-    File.stubs(:readlines).with(Dictionary::WORDS_FILE_PATH).returns(%w(grape thing))
+  test 'samples one random word' do
+    assert_includes [%w(grape), %w(thing)], Dictionary.sample
+  end
 
-    assert_includes [%w(grape), %w(thing)], Dictionary.sample(1)
+  test 'samples many random words' do
     assert_includes [%w(grape thing), %w(thing grape)], Dictionary.sample(2)
   end
 end
