@@ -22,6 +22,16 @@ class Event < ActiveRecord::Base
     end
 
     def generate_token
+      counter = 2
       self.token = Token.generate(2)
+
+      while Event.find_by_token(self.token)
+        self.token = Token.generate(2)
+        counter -= 1
+
+        if counter == 0
+          raise "Can't generate unique token for event."
+        end
+      end
     end
 end
