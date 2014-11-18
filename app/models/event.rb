@@ -8,19 +8,11 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :date, presence: true
 
-  before_save :ensure_one_current
-
   def self.current
     find_by_current true
   end
 
   private
-    def ensure_one_current
-      if current_changed? && current?
-        self.class.current.try(:update!, current: false)
-      end
-    end
-
     def generate_token
       counter = 2
       self.token = Token.generate(2)
