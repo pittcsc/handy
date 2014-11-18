@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017004203) do
+ActiveRecord::Schema.define(version: 20141118045216) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id", limit: 4
@@ -55,5 +55,14 @@ ActiveRecord::Schema.define(version: 20141017004203) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "users", force: true do |t|
+    t.string   "email",           limit: 255, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest", limit: 255, null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
