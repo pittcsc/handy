@@ -38,13 +38,13 @@ class EventsController < ApplicationController
   def make_current
     @event.update!(current: true)
 
-    redirect_to events_url
+    redirect_to(:back)
   end
 
   def remove_current
     @event.update!(current: false)
 
-    redirect_to events_url
+    redirect_to(:back)
   end
 
   private

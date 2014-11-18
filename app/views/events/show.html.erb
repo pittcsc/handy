@@ -1,5 +1,10 @@
 <h2><%= @event.name %> Attendance</h2>
 <h4>Event Code: <code><%= @event.token %></code></h4>
+<% if @event.current? %>
+  <%= button_to "Mark as done", remove_current_event_path(@event) %>
+<% else %>
+  <%= button_to "Mark as current", make_current_event_path(@event) %>
+<% end %>
 
 <% if @attendances.any? %>
   <p><%= pluralize @attendances.count, 'member' %> checked in for this event:</p>
