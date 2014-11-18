@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   def create
     event = Event.create!(event_params)
 
-    redirect_to event_url(event)
+    redirect_to event
   end
 
   def edit
