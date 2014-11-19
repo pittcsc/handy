@@ -18,18 +18,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'finds current' do
-    assert_equal events(:meeting), Event.current
-  end
-
-  test 'allows only one current' do
-    meeting = events(:meeting)
-    workshop = events(:workshop)
-
-    workshop.update!(current: true)
-    meeting.reload
-
-    assert_not meeting.current?
-    assert workshop.current?
+    assert_equal [events(:meeting)], Event.current
   end
 
   test 'generates token from two random words' do
