@@ -11,9 +11,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    Event.create!(event_params)
+    event = Event.create!(event_params)
 
-    redirect_to events_url
+    redirect_to event
   end
 
   def edit
@@ -38,13 +38,13 @@ class EventsController < ApplicationController
   def make_current
     @event.update!(current: true)
 
-    redirect_to events_url
+    redirect_to(:back)
   end
 
   def remove_current
     @event.update!(current: false)
 
-    redirect_to events_url
+    redirect_to(:back)
   end
 
   private

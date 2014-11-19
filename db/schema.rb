@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118045216) do
+ActiveRecord::Schema.define(version: 20141118203824) do
 
   create_table "attendances", force: true do |t|
     t.integer "member_id", limit: 4

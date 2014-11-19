@@ -17,7 +17,7 @@ class TextMessage::Processor
 
   private
     def current_event_with_token
-      @current_event_with_token ||= Event.where(token: event_token).current
+      @current_event_with_token ||= Event.current.find_by_token(event_token)
     end
 
     def event_token

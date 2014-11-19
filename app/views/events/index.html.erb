@@ -14,6 +14,7 @@
   <tr>
     <th>Name</th>
     <th>Date</th>
+	<th>Token</th>
     <th>Edit</th>
     <th>Current?</th>
     <th>Remove Event</th>
@@ -24,14 +25,9 @@
     <tr>
       <td><%= event.name %></td>
       <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
+	  <td><code><%= event.token %></code></td>
       <td><%= link_to "Edit event", edit_event_path(event.id) %></td>
-
-      <% if event.current? %>
-        <td><%= button_to "Mark as done", remove_current_event_path(event) %></td>
-      <% else %>
-        <td><%= button_to "Mark as current", make_current_event_path(event) %></td>
-      <% end %>
-
+      <td><%= currency_button(event) %></td>
 	  <td><%= link_to 'Delete event', event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %></td>
       <td><%= link_to "Attendance", event_path(event) %></td>
     </tr>

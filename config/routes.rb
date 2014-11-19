@@ -12,10 +12,7 @@ Rails.application.routes.draw do
     resources :attendances
   end
 
-  # Resources for user creation and such
-  resources :users
-
-  # Login/logout information
+  # Authentication
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
