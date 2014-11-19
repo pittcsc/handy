@@ -1,6 +1,7 @@
 <h2><%= @event.name %> Attendance</h2>
 <h4>Event Code: <code><%= @event.token %></code></h4>
-<%= currency_button(@event) %>
+
+<%= toggle_event_button(@event) %>
 
 <% if @attendances.any? %>
   <p><%= pluralize @attendances.count, 'member' %> checked in for this event:</p>
@@ -13,4 +14,5 @@
 <% else %>
   <p>No members have checked in for this event yet.</p>
 <% end %>
+
 <h4><%= link_to "Back to event list", events_url %></h4>
