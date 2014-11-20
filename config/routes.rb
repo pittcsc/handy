@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :attendances
   end
 
+  resource :user
+
   # Authentication
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
