@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :registrations, dependent: :destroy
 
-  before_validation :generate_token, on: :create
+  before_validation :generate_unique_token, on: :create
   validates :token, presence: true, uniqueness: true
 
   validates :name, presence: true
@@ -13,17 +13,12 @@ class Event < ActiveRecord::Base
   end
 
   private
-    def generate_token
-      counter = 2
-      self.token = Dictionary.sample(2).join(' ')
-
-      while Event.find_by_token(self.token)
+    def generate_unique_token
+      100.times do
         self.token = Dictionary.sample(2).join(' ')
-        counter -= 1
-
-        if counter == 0
-          raise "Can't generate unique token for event."
-        end
+        return unless self.class.find_by_token(token)
       end
+
+      raise "Couldn't generate unique token for event in 100 tries"
     end
 end
