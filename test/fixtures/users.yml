@@ -1,0 +1,9 @@
+<% password_digest = User.new(password: 'secret').password_digest %>
+
+jeff:
+  email: jeff@example.com
+  password_digest: <%= password_digest %>
+
+annie:
+  email: annie@example.com
+  password_digest: <%= password_digest %>
