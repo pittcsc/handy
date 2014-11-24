@@ -16,9 +16,11 @@ before_fork do |server, worker|
   # When the last new worker is spawned, kill the old master. Facilitates hot restarts.
   old_pid = "#{server.config[:pid]}.oldbin"
   if old_pid != server.pid
-    signal = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-    Process.kill(signal, File.read(old_pid).to_i)
-  rescue Errno::ENOENT, Errno::ESRCH
+    begin
+      signal = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(signal, File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+    end
   end
 end
 
