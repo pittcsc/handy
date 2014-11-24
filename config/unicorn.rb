@@ -11,23 +11,21 @@ stdout_path '/u/apps/handy/shared/log/unicorn.log'
 
 working_directory '/u/apps/handy/current'
 
-# When a new master process is forked, kill off the old one. Facilitates hot restarts.
 before_fork do |server, worker|
+  # For each worker spawned by a new master process, kill off one of the old master's workers.
+  # When the last new worker is spawned, kill the old master. Facilitates hot restarts.
   old_pid = "#{server.config[:pid]}.oldbin"
   if old_pid != server.pid
-    begin
-      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-      Process.kill(sig, File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-    end
+    signal = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+    Process.kill(signal, File.read(old_pid).to_i)
+  rescue Errno::ENOENT, Errno::ESRCH
   end
 end
 
 after_fork do |server, worker|
   # Give processes nice titles.
   revision = File.read('/u/apps/handy/current/REVISION').slice(0, 6)
-  ENV['UNICORN_PROCTITLE'] = "handy-#{revision}"
-  $0 = ENV['UNICORN_PROCTITLE']
+  $0 = ENV['UNICORN_PROCTITLE'] = "handy-#{revision} ruby-#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
   # Close DB connections. No need for processes to hold open connections.
   ActiveRecord::Base.clear_all_connections!
