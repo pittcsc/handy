@@ -3,8 +3,10 @@ class Registration < ActiveRecord::Base
 
   def complete
     transaction do
-      member = Member.create!(name: name, phone: phone_number, email: email_address)
-      event.attendances.create!(member: member)
+      Member.create!(name: name, phone: phone_number, email: email_address) do |member|
+        member.attendances << event.attendances.build
+      end
+
       destroy!
     end
   end
