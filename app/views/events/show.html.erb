@@ -3,12 +3,12 @@
 
 <%= toggle_event_button(@event) %>
 
-<% if @attendances.any? %>
-  <p><%= pluralize @attendances.count, 'member' %> checked in for this event:</p>
+<% if @attendees.any? %>
+  <p><%= pluralize @attendees.count, 'member' %> checked in for this event:</p>
 
   <ul>
-    <% @attendances.each do |attendance| %>
-      <li><%= attendance.member.name %></li>
+    <% @attendees.each do |attendee| %>
+      <li><%= attendee.name %></li>
     <% end %>
   </ul>
 <% else %>
