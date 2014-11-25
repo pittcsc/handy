@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MemberTest < ActiveSupport::TestCase
-  test 'determines first name from full name with one part'
+  test 'determines first name from full name with one part' do
     assert_equal 'Tyler', Member.new(name: 'Tyler').first_name
   end
 
