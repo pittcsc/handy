@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :accesses
+  has_many :organizations, through: :accesses
 
   validates :email, presence: true, uniqueness: true
 

@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :member 
   has_many :registrations, dependent: :destroy
+  has_many :ownerships, class_name: 'EventOwnership'
+  has_many :organizations, through: :ownerships
 
   before_validation :generate_unique_token, on: :create
   validates :token, presence: true, uniqueness: true
