@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126204239) do
+ActiveRecord::Schema.define(version: 20141126210321) do
+
+  create_table "accesses", force: true do |t|
+    t.integer "user_id",         limit: 4
+    t.integer "organization_id", limit: 4
+  end
 
   create_table "attendances", force: true do |t|
     t.integer "member_id", limit: 4
@@ -19,6 +24,11 @@ ActiveRecord::Schema.define(version: 20141126204239) do
   end
 
   add_index "attendances", ["event_id", "member_id"], name: "index_attendances_on_event_id_and_member_id", unique: true, using: :btree
+
+  create_table "event_ownerships", force: true do |t|
+    t.integer "event_id",        limit: 4
+    t.integer "organization_id", limit: 4
+  end
 
   create_table "events", force: true do |t|
     t.string  "name",    limit: 255
@@ -28,13 +38,6 @@ ActiveRecord::Schema.define(version: 20141126204239) do
   end
 
   add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree
-
-  create_table "events_organizations", id: false, force: true do |t|
-    t.integer "event_id",        limit: 4
-    t.integer "organization_id", limit: 4
-  end
-
-  add_index "events_organizations", ["event_id", "organization_id"], name: "index_events_organizations_on_event_id_and_organization_id", using: :btree
 
   create_table "events_organzations", id: false, force: true do |t|
     t.integer "event_id",        limit: 4
@@ -52,13 +55,6 @@ ActiveRecord::Schema.define(version: 20141126204239) do
   create_table "organizations", force: true do |t|
     t.string "name", limit: 255
   end
-
-  create_table "organizations_users", id: false, force: true do |t|
-    t.integer "organization_id", limit: 4
-    t.integer "user_id",         limit: 4
-  end
-
-  add_index "organizations_users", ["organization_id", "user_id"], name: "index_organizations_users_on_organization_id_and_user_id", using: :btree
 
   create_table "registrations", force: true do |t|
     t.integer  "event_id",      limit: 4,   null: false
