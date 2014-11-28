@@ -14,13 +14,13 @@ class TextMessageTest < ActiveSupport::TestCase
   end
 
   test 'processes as check-in with member' do
-    TextMessage::AttendanceProcessor.any_instance.expects(:process).once
+    TextMessage::AttendanceProcessor.expects(:process).with(text_messages(:michael_checking_in)).once
 
     text_messages(:michael_checking_in).process
   end
 
   test 'processes as registration without member' do
-    TextMessage::RegistrationProcessor.any_instance.expects(:process).once
+    TextMessage::RegistrationProcessor.expects(:process).with(text_messages(:rashid_checking_in)).once
 
     text_messages(:rashid_checking_in).process
   end

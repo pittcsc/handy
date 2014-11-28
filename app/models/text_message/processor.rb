@@ -2,8 +2,16 @@ class TextMessage::Processor
   attr_reader :text_message
   delegate :member, :respond, to: :text_message
 
+  def self.process(text_message)
+    new(text_message).process
+  end
+
   def initialize(text_message)
     @text_message = text_message
+  end
+
+  def process
+    raise NotImplementedError, "Subclasses of TextMessage::Processor must implement process"
   end
 
   protected

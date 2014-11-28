@@ -13,9 +13,9 @@ class TextMessage < ActiveRecord::Base
 
   def process
     if member
-      AttendanceProcessor.new(self).process
+      AttendanceProcessor.process(self)
     else
-      RegistrationProcessor.new(self).process
+      RegistrationProcessor.process(self)
     end
 
     destroy!

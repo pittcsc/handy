@@ -8,7 +8,7 @@ class TextMessage::AttendanceProcessorTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Thanks, Michael. You're checked in for Meeting.").once
     assert_difference -> { event.attendees.count }, 1 do
-      TextMessage::AttendanceProcessor.new(text_message).process
+      TextMessage::AttendanceProcessor.process(text_message)
     end
   end
 
@@ -17,7 +17,7 @@ class TextMessage::AttendanceProcessorTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Attendance.count } do
-      TextMessage::AttendanceProcessor.new(text_message).process
+      TextMessage::AttendanceProcessor.process(text_message)
     end
   end
 end

@@ -7,7 +7,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("It looks like this is your first time checking in. What's your name?").once
     assert_difference -> { event.registrations.count }, 1 do
-      TextMessage::RegistrationProcessor.new(text_message).process
+      TextMessage::RegistrationProcessor.process(text_message)
     end
   end
 
@@ -17,7 +17,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Registration.count } do
-      TextMessage::RegistrationProcessor.new(text_message).process
+      TextMessage::RegistrationProcessor.process(text_message)
     end
   end
 
@@ -27,7 +27,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Registration.count } do
-      TextMessage::RegistrationProcessor.new(text_message).process
+      TextMessage::RegistrationProcessor.process(text_message)
     end
   end
 
@@ -36,7 +36,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
     text_message = stub(registration: registration, body: 'Rashid Thomas')
 
     text_message.expects(:respond).with("Thanks! One last question: what's your email address?").once
-    TextMessage::RegistrationProcessor.new(text_message).process
+    TextMessage::RegistrationProcessor.process(text_message)
     assert_equal 'Rashid Thomas', registration.reload.name
   end
 
@@ -48,7 +48,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
     assert_difference -> { Member.count }, 1 do
     assert_difference -> { registration.event.attendees.count }, 1 do
     assert_difference -> { Registration.count }, -1 do
-      TextMessage::RegistrationProcessor.new(text_message).process
+      TextMessage::RegistrationProcessor.process(text_message)
     end
     end
     end
