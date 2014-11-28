@@ -17,11 +17,11 @@ class ActionController::TestCase
   end
 
   def log_in_as(user)
-    @controller.stubs(:current_user).returns(user)
+    session[:user_id] = user.id
   end
 
   def log_out
-    @controller.unstub(:current_user)
+    session[:user_id] = nil
   end
 end
 
