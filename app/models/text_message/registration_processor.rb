@@ -25,7 +25,7 @@ class TextMessage
         else
           registration.update!(email_address: text_message.body)
           registration.complete
-          respond "All set, #{member.first_name}! You're checked in for #{registration.event.name}."
+          respond "All set! You're checked in for #{registration.event.name}."
         end
       end
   end

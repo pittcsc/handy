@@ -1,5 +1,11 @@
 rashid:
   event: meeting
-  name: Rashid Thomas
-  email_address: rashid@example.com
+  name:
+  email_address:
   phone_number: +15553930125
+
+michelle:
+  event: meeting
+  name: Michelle Stark
+  email_address:
+  phone_number: +15551178989
