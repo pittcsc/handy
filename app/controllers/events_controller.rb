@@ -5,6 +5,10 @@ class EventsController < ApplicationController
     @events = Event.order(date: :desc)
   end
 
+  def show
+    @attendees = @event.attendees
+  end
+
   def new
     @event = Event.new
   end
@@ -18,10 +22,6 @@ class EventsController < ApplicationController
   def edit
   end
 
-  def show
-    @attendees = @event.attendees
-  end
-
   def update
     @event.update!(event_params)
 
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy
+    @event.destroy!
 
     redirect_to events_url
   end

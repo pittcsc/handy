@@ -1,7 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -11,3 +10,15 @@ class ActiveSupport::TestCase
     'secret'
   end
 end
+
+class ActionController::TestCase
+  setup do
+    log_in_as users(:jeff)
+  end
+
+  def log_in_as(user)
+    @controller.stubs(:current_user).returns(user)
+  end
+end
+
+require 'mocha/mini_test'
