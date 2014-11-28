@@ -8,8 +8,6 @@ Rails.application.routes.draw do
       post :activate
       post :deactivate
     end
-
-    resources :attendances
   end
 
   resource :user
