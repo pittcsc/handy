@@ -19,8 +19,8 @@ class EventTest < ActiveSupport::TestCase
     assert @event.invalid?
   end
 
-  test 'finds current' do
-    assert_equal [@event], Event.current
+  test 'finds active' do
+    assert_equal [@event], Event.active
   end
 
   test 'generates token from two random words' do

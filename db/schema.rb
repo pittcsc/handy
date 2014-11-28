@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126214510) do
+ActiveRecord::Schema.define(version: 20141128044020) do
 
   create_table "accesses", force: true do |t|
     t.integer "user_id",         limit: 4
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 20141126214510) do
   add_index "event_ownerships", ["event_id", "organization_id"], name: "index_event_ownerships_on_event_id_and_organization_id", unique: true, using: :btree
 
   create_table "events", force: true do |t|
-    t.string  "name",    limit: 255
+    t.string  "name",   limit: 255
     t.date    "date"
-    t.boolean "current", limit: 1,   default: false, null: false
-    t.string  "token",   limit: 255,                 null: false
+    t.boolean "active", limit: 1,   default: false, null: false
+    t.string  "token",  limit: 255,                 null: false
   end
 
   add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree

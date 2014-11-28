@@ -34,16 +34,16 @@ class EventsController < ApplicationController
     redirect_to events_url
   end
 
-  def make_current
-    @event.update!(current: true)
+  def activate
+    @event.update!(active: true)
 
-    redirect_to(:back)
+    redirect_to :back
   end
 
-  def remove_current
-    @event.update!(current: false)
+  def deactivate
+    @event.update!(active: false)
 
-    redirect_to(:back)
+    redirect_to :back
   end
 
   private

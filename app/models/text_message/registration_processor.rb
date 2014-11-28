@@ -12,7 +12,7 @@ class TextMessage
 
     private
       def start_new_registration
-        for_current_event_with_token do |event|
+        with_active_event_by_token do |event|
           event.registrations.create!(phone_number: text_message.phone_number)
           respond "It looks like this is your first time checking in. What's your name?"
         end

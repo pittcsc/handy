@@ -1,7 +1,7 @@
 class TextMessage
   class AttendanceProcessor < Processor
     def process
-      for_current_event_with_token do |event|
+      with_active_event_by_token do |event|
         create_attendance event
       end
     end

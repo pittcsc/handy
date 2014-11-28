@@ -1,11 +1,11 @@
 meeting:
   name: Meeting
   date: 2014-11-01
-  current: true
+  active: true
   token: mayonnaise fragrance
 
 workshop:
   name: Workshop
   date: 2014-11-01
-  current: false
+  active: false
   token: debt cinema

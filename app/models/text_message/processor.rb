@@ -7,21 +7,17 @@ class TextMessage::Processor
   end
 
   protected
-    def for_current_event_with_token
-      if current_event_with_token
-        yield current_event_with_token
+    def with_active_event_by_token
+      if active_event_by_token
+        yield active_event_by_token
       else
         reject_invalid_event_token
       end
     end
 
   private
-    def current_event_with_token
-      @current_event_with_token ||= Event.current.find_by_token(event_token)
-    end
-
-    def event_token
-      text_message.body.downcase
+    def active_event_by_token
+      @active_event_by_token ||= Event.active.find_by_token(text_message.body.downcase)
     end
 
     def reject_invalid_event_token
