@@ -19,6 +19,10 @@ class ActionController::TestCase
   def log_in_as(user)
     @controller.stubs(:current_user).returns(user)
   end
+
+  def log_out
+    @controller.unstub(:current_user)
+  end
 end
 
 require 'mocha/mini_test'
