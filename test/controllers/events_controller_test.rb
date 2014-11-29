@@ -31,6 +31,8 @@ class EventsControllerTest < ActionController::TestCase
       post :create, event: { name: 'Meeting', date: '2014-11-30' }
     end
     assert_redirected_to Event.last
+    assert_equal 'Meeting', Event.last.name
+    assert_equal Date.parse('2014-11-30'), Event.last.date
   end
 
   test 'edit' do
