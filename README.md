@@ -2,6 +2,8 @@
 
 Handy takes attendance at events via SMS.
 
+[![Travis CI][1]][2]
+
 
 ## Getting Started
 
@@ -18,3 +20,7 @@ bin/setup
 ```
 
 That's it!
+
+
+[1]: https://travis-ci.org/Pitt-CSC/handy.svg?branch=master
+[2]: https://travis-ci.org/Pitt-CSC/handy
