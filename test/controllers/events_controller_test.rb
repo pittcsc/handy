@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
+  setup do
+    log_in_as users(:jeff)
+  end
+
   test 'index' do
     get :index
 
@@ -23,11 +27,10 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'create' do
-    post :create, event: { name: 'Meeting', date: '2014-11-30' }
-
+    assert_difference -> { Event.count } do
+      post :create, event: { name: 'Meeting', date: '2014-11-30' }
+    end
     assert_redirected_to Event.last
-    assert_equal 'Meeting', Event.last.name
-    assert_equal Date.parse('2014-11-30'), Event.last.date
   end
 
   test 'edit' do
@@ -51,7 +54,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'activate' do
-    @request.env['HTTP_REFERER'] = events_url
+    request.env['HTTP_REFERER'] = events_url
     post :activate, id: events(:workshop)
 
     assert_redirected_to events_url
@@ -59,7 +62,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'deactivate' do
-    @request.env['HTTP_REFERER'] = events_url
+    request.env['HTTP_REFERER'] = events_url
     post :deactivate, id: events(:meeting)
 
     assert_redirected_to events_url
