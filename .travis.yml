@@ -8,5 +8,6 @@ before_script:
   - cp config/secrets.yml.sample config/secrets.yml
   - cp config/twilio.yml.sample config/twilio.yml
 notifications:
+  email: false
   slack:
     secure: KSg+Em4mi7dCyWrPehv2ZehK6ujz9puI3V5fje6erpt/g2oiXdxo8enniTgtobZ3pacbpJ9LcPfxiqr2nRoUZfA5R/aFMkgIJANIYweHG10Ny41Uo4GjQGZLjf2brJTFk30ySAyGl7+F5QppA+ob7jp5mI2RwhvI9fC+YaX5GN8=
