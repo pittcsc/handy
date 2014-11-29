@@ -14,13 +14,6 @@ class Sms::InboundMessagesControllerTest < ActionController::TestCase
     assert_equal 'hello!', TextMessage.last.body
   end
 
-  test 'create does not require authentication' do
-    log_out
-
-    post :create, From: '+15558675309', Body: 'hello!'
-    assert_response :ok
-  end
-
   test 'create strips leading and trailing whitespace from text message bodies' do
     post :create, From: '+15558675309', Body: '  hello, my friend!   '
     assert_response :ok

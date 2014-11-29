@@ -6,6 +6,12 @@ module Authentication
     helper_method :current_user
   end
 
+  module ClassMethods
+    def skip_authentication(options = {})
+      skip_before_action :require_authentication, options.slice(:only, :except)
+    end
+  end
+
   private
     def current_user
       @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]

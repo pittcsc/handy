@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_authentication, only: [:new, :create]
+  skip_authentication only: [:new, :create]
 
   def new
     redirect_to root_url if current_user
