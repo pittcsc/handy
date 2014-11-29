@@ -4,7 +4,6 @@ class AuthenticationTest < ActionController::TestCase
   tests EventsController
 
   test 'requires authentication for HTML requests' do
-    log_out
     session[:user_id] = nil
 
     get :index
@@ -12,7 +11,6 @@ class AuthenticationTest < ActionController::TestCase
   end
 
   test 'requires authentication for non-HTML requests' do
-    log_out
     session[:user_id] = nil
 
     get :index, format: :xhr
