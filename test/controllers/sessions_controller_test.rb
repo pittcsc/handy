@@ -2,12 +2,12 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
   test 'new' do
-    log_out
     get :new
     assert_response :success
   end
 
   test 'new for authenticated user' do
+    log_in_as users(:jeff)
     get :new
     assert_redirected_to root_url
   end
