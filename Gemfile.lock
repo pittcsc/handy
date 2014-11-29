@@ -219,6 +219,7 @@ DEPENDENCIES
   mocha
   mysql2
   rails (= 4.2.0.beta4)
+  rake
   redis-rails
   resque-pool
   resque-scheduler

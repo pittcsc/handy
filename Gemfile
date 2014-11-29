@@ -20,9 +20,6 @@ gem 'resque-scheduler'
 # SMS
 gem 'twilio-ruby'
 
-# Logging
-gem 'sysloglogger', '2.0', github: 'sparklemotion/sysloglogger'
-
 # Encryption
 gem 'bcrypt'
 
@@ -35,9 +32,11 @@ group :development do
 end
 
 group :test do
+  gem 'rake'
   gem 'mocha', require: false
 end
 
 group :production do
   gem 'unicorn'
+  gem 'sysloglogger', '2.0', github: 'sparklemotion/sysloglogger'
 end
