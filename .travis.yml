@@ -2,5 +2,8 @@ language: ruby
 rvm:
   - 2.1.2
 bundler_args: --without development production
-before_install:
+before_script:
+  - mysql -e 'CREATE DATABASE handy_test'
+  - cp config/database.yml.sample config/database.yml
+  - cp config/secrets.yml.sample config/secrets.yml
   - cp config/twilio.yml.sample config/twilio.yml
