@@ -12,6 +12,16 @@ class TextMessage::AttendanceProcessorTest < ActiveSupport::TestCase
     end
   end
 
+  test 'processes with a valid token for an inactive event' do
+    event = events(:workshop)
+    text_message = stub(body: event.token)
+
+    text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
+    assert_no_difference -> { Attendance.count } do
+      TextMessage::AttendanceProcessor.process(text_message)
+    end
+  end
+
   test 'processes with an invalid token' do
     text_message = stub(body: 'invalid token')
 
