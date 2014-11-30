@@ -32,3 +32,7 @@ after_fork do |server, worker|
   # Close DB connections. No need for processes to hold open connections.
   ActiveRecord::Base.clear_all_connections!
 end
+
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = '/u/apps/handy/current/Gemfile'
+end
