@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post 'text', to: 'sms/inbound_messages#create'
 
+  resources :organizations
   resources :events do
     member do
       post :activate
