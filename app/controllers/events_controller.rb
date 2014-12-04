@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, except: [:index, :new, :create]
 
   def index
-    @events = Event.order(date: :desc)
+    @events = Event.order(date: :desc).page(current_page)
   end
 
   def show

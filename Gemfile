@@ -5,6 +5,7 @@ gem 'mysql2'
 
 # Plugins
 gem 'turbolinks'
+gem 'will_paginate', '~> 3.0.7'
 
 # Assets
 gem 'coffee-rails', '~> 4.0.0'

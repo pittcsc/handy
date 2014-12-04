@@ -9,7 +9,39 @@ class EventsControllerTest < ActionController::TestCase
     get :index
 
     assert_response :success
-    assert_equal Event.order(date: :desc), assigns(:events)
+    assert_equal Event.order(date: :desc).page(1), assigns(:events)
+  end
+
+  test 'index paginates' do
+    create_paginated_events
+    get :index
+
+    assert_response :success
+    assert_equal 30, assigns(:events).size
+  end
+
+  test 'index paginates on last page' do
+    create_paginated_events
+    get :index, page: 2
+
+    assert_response :success
+    assert_equal 20, assigns(:events).size
+  end
+
+  test 'index paginates with negative page number' do
+    create_paginated_events
+    get :index, page: -100
+
+    assert_response :success
+    assert_equal 30, assigns(:events).size
+  end
+
+  test 'index paginates with invalid page number' do
+    create_paginated_events
+    get :index, page: 'foo'
+
+    assert_response :success
+    assert_equal 30, assigns(:events).size
   end
 
   test 'show' do
@@ -70,4 +102,12 @@ class EventsControllerTest < ActionController::TestCase
     assert_redirected_to events_url
     assert_not events(:meeting).reload.active?
   end
+
+  private
+    def create_paginated_events
+      Event.delete_all
+      50.times do
+        Event.create!(name: 'Event', date: Date.today)
+      end
+    end
 end
