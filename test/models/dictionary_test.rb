@@ -6,6 +6,10 @@ class DictionaryTest < ActiveSupport::TestCase
     File.stubs(:readlines).with(Dictionary::WORDS_FILE_PATH).returns(%w(grape thing))
   end
 
+  teardown do
+    Dictionary.reload
+  end
+
   test 'maintains a list of words' do
     assert_equal %w(grape thing), Dictionary.words
   end
