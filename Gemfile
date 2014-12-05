@@ -27,6 +27,10 @@ gem 'bcrypt'
 group :development do
   gem 'spring'
 
+  # Testing
+  gem 'guard'
+  gem 'guard-minitest'
+
   # Deployment
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails', require: false
