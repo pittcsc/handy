@@ -1,6 +1,6 @@
 class TextMessage::Processor
   attr_reader :text_message
-  delegate :member, :respond, to: :text_message
+  delegate :member, to: :text_message
 
   def self.process(text_message)
     new(text_message).process
@@ -21,6 +21,10 @@ class TextMessage::Processor
       else
         reject_invalid_event_token
       end
+    end
+
+    def respond(response_body)
+      text_message.respond_later(response_body)
     end
 
   private

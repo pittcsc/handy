@@ -7,7 +7,7 @@ class TextMessage < ActiveRecord::Base
     @registration ||= Registration.find_by_phone_number(phone_number)
   end
 
-  def enqueue_for_processing
+  def process_later
     Sms::ProcessingJob.perform_later(self)
   end
 
@@ -21,7 +21,7 @@ class TextMessage < ActiveRecord::Base
     destroy!
   end
 
-  def respond(response_body)
+  def respond_later(response_body)
     Sms::DeliveryJob.perform_later(phone_number, response_body)
   end
 end

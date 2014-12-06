@@ -4,16 +4,13 @@ class Sms::InboundMessagesController < ApplicationController
   skip_authentication
 
   def create
-    TextMessage.create!(text_message_attributes).enqueue_for_processing
+    TextMessage.create!(text_message_attributes).process_later
 
     head :ok
   end
 
   private
     def text_message_attributes
-      {
-        phone_number: params[:From],
-        body: params[:Body].strip
-      }
+      { phone_number: params[:From], body: params[:Body].strip }
     end
 end

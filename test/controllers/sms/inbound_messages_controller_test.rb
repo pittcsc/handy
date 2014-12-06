@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Sms::InboundMessagesControllerTest < ActionController::TestCase
   setup do
-    TextMessage.any_instance.expects(:enqueue_for_processing).once
+    TextMessage.any_instance.expects(:process_later).once
   end
 
   test 'create' do

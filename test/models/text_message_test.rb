@@ -13,6 +13,12 @@ class TextMessageTest < ActiveSupport::TestCase
     assert_equal registrations(:rashid), text_messages(:rashid_checking_in).registration
   end
 
+  test 'processes later' do
+    Sms::ProcessingJob.expects(:perform_later).with(text_messages(:michael_checking_in))
+
+    text_messages(:michael_checking_in).process_later
+  end
+
   test 'processes as check-in with member' do
     TextMessage::AttendanceProcessor.expects(:process).with(text_messages(:michael_checking_in)).once
 
@@ -25,9 +31,9 @@ class TextMessageTest < ActiveSupport::TestCase
     text_messages(:rashid_checking_in).process
   end
 
-  test 'responds' do
+  test 'responds later' do
     Sms::DeliveryJob.expects(:perform_later).with(text_messages(:michael_checking_in).phone_number, 'Message received!')
 
-    text_messages(:michael_checking_in).respond('Message received!')
+    text_messages(:michael_checking_in).respond_later('Message received!')
   end
 end
