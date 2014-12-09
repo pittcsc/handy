@@ -36,6 +36,7 @@ group :development do
   gem 'guard-minitest'
 
   # Deployment
+  gem 'capistrano', '~> 3.2.1', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails', require: false
 end
