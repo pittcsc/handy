@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0.rc1'
+gem 'rails', '4.2.0.rc2'
 gem 'mysql2'
 
 # Plugins
@@ -26,6 +26,10 @@ gem 'bcrypt'
 
 group :development do
   gem 'spring'
+
+  # Debugging
+  gem 'byebug'
+  gem 'web-console'
 
   # Testing
   gem 'guard'
