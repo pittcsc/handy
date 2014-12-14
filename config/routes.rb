@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 
+  get 'monitoring/up', to: 'monitoring#up'
   resource :boom
 end
