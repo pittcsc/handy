@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 
+  namespace :admin do
+    mount Resque::Server, at: 'resque'
+  end
+
   get 'monitoring/up', to: 'monitoring#up'
   resource :boom
 end
