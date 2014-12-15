@@ -3,6 +3,7 @@
 jeff:
   email: jeff@example.com
   password_digest: <%= password_digest %>
+  admin: true
 
 annie:
   email: annie@example.com

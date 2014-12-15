@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true
 
+  scope :admin, -> { where(admin: true) }
+
   def self.authenticate(email, password)
     find_by_email(email).try(:authenticate, password)
   end

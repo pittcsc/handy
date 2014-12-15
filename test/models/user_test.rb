@@ -5,14 +5,14 @@ class UserTest < ActiveSupport::TestCase
     @user = users(:jeff)
   end
 
-  test 'email is required' do
+  test 'requires email' do
     assert @user.valid?
 
     @user.email = ''
     assert @user.invalid?
   end
 
-  test 'email must be unique' do
+  test 'requires unique email' do
     other_user = users(:annie)
     assert other_user.valid?
 
@@ -30,5 +30,9 @@ class UserTest < ActiveSupport::TestCase
 
   test 'authenticates with incorrect email and password' do
     assert_not User.authenticate('wrong email', 'wrong password')
+  end
+
+  test 'finds admins' do
+    assert_equal [users(:jeff)], User.admin
   end
 end

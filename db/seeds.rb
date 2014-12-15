@@ -2,7 +2,7 @@
 csc = Organization.create!(name: 'Pitt CSC')
 
 # Users
-joel = User.create!(email: 'joel@example.com', password: 'secret')
+joel = User.create!(email: 'joel@example.com', password: 'secret', admin: true)
 
 # Accesses
 csc.accesses.create!(user: joel)
