@@ -1,10 +1,13 @@
 class OrganizationsController < ApplicationController
+  before_action :set_organization, except: [:index, :new, :create]
+  before_action :verify_organization, except: [:index, :new, :create]
+
   def index
     @organizations = current_user.organizations
   end
 
   def show
-    @events = Organization.find(params[:id]).events
+    @events = @organization.events.order(date: :desc).page(current_page)
   end
 
   def new
@@ -13,6 +16,7 @@ class OrganizationsController < ApplicationController
 
   def create
     organization = Organization.create!(organization_params)
+    organization.users.append(current_user)
 
     redirect_to organization
   end
@@ -33,6 +37,16 @@ class OrganizationsController < ApplicationController
   end
 
   private
+    def set_organization
+      @organization = Organization.find(params[:id])
+    end
+
+    def verify_organization
+      unless @organization.users.include?(current_user)
+        redirect_to organizations_url
+      end
+    end
+
     def current_user
       @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end

@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  root to: 'events#index'
+  root to: 'organizations#index'
 
   post 'text', to: 'sms/inbound_messages#create'
 
-  resources :organizations
-  resources :events do
-    member do
-      post :activate
-      post :deactivate
-    end
+  resources :organizations do
+    resources :events do
+        member do
+          post :activate
+          post :deactivate
+        end
+     end
   end
 
   resource :user

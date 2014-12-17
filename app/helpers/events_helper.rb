@@ -9,9 +9,9 @@ module EventsHelper
 
   def toggle_event_button(event)
     if event.active?
-      button_to 'Deactivate', deactivate_event_path(event)
+      button_to 'Deactivate', deactivate_organization_event_path(@organization, event)
     else
-      button_to 'Activate', activate_event_path(event)
+      button_to 'Activate', activate_organization_event_path(@organization, event)
     end
   end
 end
