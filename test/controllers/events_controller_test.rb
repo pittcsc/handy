@@ -3,18 +3,19 @@ require 'test_helper'
 class EventsControllerTest < ActionController::TestCase
   setup do
     log_in_as users(:jeff)
+    @organization = organizations(:csc)
   end
 
   test 'index' do
-    get :index
+    get(:show, {'organization_id' => @organization.id})
 
     assert_response :success
-    assert_equal Event.order(date: :desc).page(1), assigns(:events)
+    assert_equal @organization.events.order(date: :desc).page(1), assigns(:events)
   end
 
   test 'index paginates' do
     create_paginated_events
-    get :index
+    get(:show, {'organization_id' => @organization.id})
 
     assert_response :success
     assert_equal 30, assigns(:events).size
@@ -22,7 +23,8 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'index paginates on last page' do
     create_paginated_events
-    get :index, page: 2
+#    get :index, page: 2
+    get(:show, {'organization_id' => @organization.id, 'page' => 2})
 
     assert_response :success
     assert_equal 20, assigns(:events).size
@@ -30,7 +32,8 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'index paginates with negative page number' do
     create_paginated_events
-    get :index, page: -100
+    #get :index, page: -100
+    get(:show, {'organization_id' => @organization.id, 'page' => -100})
 
     assert_response :success
     assert_equal 30, assigns(:events).size
@@ -39,16 +42,17 @@ class EventsControllerTest < ActionController::TestCase
   test 'index paginates with invalid page number' do
     create_paginated_events
     get :index, page: 'foo'
+    get(:show, {'organization_id' => @organization.id, 'page' => 'foo'})
 
     assert_response :success
     assert_equal 30, assigns(:events).size
   end
 
   test 'show' do
-    get :show, id: events(:meeting)
+    get :show, id: events(:meetingCsc)
 
     assert_response :success
-    assert_equal events(:meeting).attendees, assigns(:attendees)
+    assert_equal events(:meetingCsc).attendees, assigns(:attendees)
   end
 
   test 'new' do
@@ -60,7 +64,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'create' do
     assert_difference -> { Event.count } do
-      post :create, event: { name: 'Meeting', date: '2014-11-30' }
+      post :create, event: { name: 'Meeting', date: '2014-11-30', organization: organizations(:csc) }
     end
     assert_redirected_to Event.last
     assert_equal 'Meeting', Event.last.name

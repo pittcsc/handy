@@ -1,0 +1,11 @@
+first:
+  event: meetingCsc
+  organization: csc
+
+second:
+  event: workshop
+  organization: csc
+
+third:
+  event: meetingWics
+  organization: wics

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
   test 'processes with a new registrant and a valid token for an active event' do
-    event = events(:meeting)
+    event = events(:meetingCsc)
     text_message = stub(phone_number: '+15557826081', registration: nil, body: event.token)
 
     text_message.expects(:respond_later).with("It looks like this is your first time checking in. What's your name?").once
@@ -22,7 +22,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
   end
 
   test 'processes with a new registrant and an invalid token' do
-    event = events(:meeting)
+    event = events(:meetingCsc)
     text_message = stub(registration: nil, phone_number: '+15557826081', body: 'invalid token')
 
     text_message.expects(:respond_later).with("Oops! That doesn't look like a valid event code.").once

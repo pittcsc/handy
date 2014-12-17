@@ -1,5 +1,5 @@
-meeting:
-  name: Meeting
+meetingCsc:
+  name: CSC Meeting
   date: 2014-11-01
   active: true
   token: mayonnaise fragrance
@@ -9,3 +9,9 @@ workshop:
   date: 2014-11-01
   active: false
   token: debt cinema
+
+meetingWics:
+  name: WiCS Meeting
+  date: 2014-11-05
+  active: false
+  token: secretary butter

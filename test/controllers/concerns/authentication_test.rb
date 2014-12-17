@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AuthenticationTest < ActionController::TestCase
-  tests EventsController
+  tests OrganizationsController
 
   test 'requires authentication for HTML requests' do
     session[:user_id] = nil
