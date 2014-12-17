@@ -11,8 +11,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    event = Event.create!(event_params)
-    @organization.events.append(event)
+    event = @organization.events.create!(event_params)
 
     redirect_to organization_event_url(@organization, event)
   end
@@ -23,13 +22,13 @@ class EventsController < ApplicationController
   def update
     @event.update!(event_params)
 
-    redirect_to organization_url(@organization)
+    redirect_to @organization
   end
 
   def destroy
     @event.destroy!
 
-    redirect_to organization_url(@organization)
+    redirect_to @organization
   end
 
   def activate
@@ -50,7 +49,9 @@ class EventsController < ApplicationController
     end
 
     def set_organization
-      @organization = Organization.find(params[:organization_id])
+      unless @organization = current_user.organizations.find(params[:organization_id])
+        redirect_to organizations_url
+      end
     end
 
     def event_params

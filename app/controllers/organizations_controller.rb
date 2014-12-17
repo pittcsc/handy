@@ -1,6 +1,5 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, except: [:index, :new, :create]
-  before_action :verify_organization, except: [:index, :new, :create]
 
   def index
     @organizations = current_user.organizations
@@ -38,17 +37,9 @@ class OrganizationsController < ApplicationController
 
   private
     def set_organization
-      @organization = Organization.find(params[:id])
-    end
-
-    def verify_organization
-      unless @organization.users.include?(current_user)
+      unless @organization = current_user.organizations.find(params[:id])
         redirect_to organizations_url
       end
-    end
-
-    def current_user
-      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
 
     def organization_params

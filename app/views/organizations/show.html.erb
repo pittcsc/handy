@@ -21,7 +21,7 @@
       <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
       <td><code><%= event.token %></code></td>
       <td><%= link_to "Edit event", edit_organization_event_path(@organization, event) %></td>
-      <td><%= toggle_event_button(event) %></td>
+      <td><%= toggle_event_button(@organization, event) %></td>
       <td><%= link_to 'Delete event', organization_event_path(@organization, event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %></td>
       <td><%= link_to "Attendance", organization_event_path(@organization, event) %></td>
     <% end %>
