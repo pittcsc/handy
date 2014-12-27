@@ -48,5 +48,4 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'sysloglogger', '2.0', github: 'sparklemotion/sysloglogger'
 end
