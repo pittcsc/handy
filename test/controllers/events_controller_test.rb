@@ -7,6 +7,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'index' do
+    # TODO: Fix the tests to use organization show rather
+    # than event index
     get(:show, {'organization_id' => @organization.id})
 
     assert_response :success
