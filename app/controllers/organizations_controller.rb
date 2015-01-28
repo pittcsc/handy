@@ -22,7 +22,7 @@ class OrganizationsController < ApplicationController
   def update
     @organization.update!(organization_params)
 
-    redirect_to organizations_url
+    redirect_to organization_events_url(@organization)
   end
 
   def destroy
