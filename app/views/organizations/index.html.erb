@@ -2,7 +2,7 @@
 
 <ul>
   <% @organizations.each do |organization| %>
-    <li><%= link_to organization.name, organization_path(organization) %></li>
+    <li><%= link_to organization.name, organization_events_url(organization) %></li>
   <% end %>
 </ul>
 

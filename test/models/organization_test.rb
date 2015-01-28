@@ -8,7 +8,7 @@ class OrganizationTest < ActiveSupport::TestCase
   test 'requires name' do
     assert @organization.valid?
 
-    @organzation.name = ''
+    @organization.name = ''
     assert @organization.invalid?
   end
 end

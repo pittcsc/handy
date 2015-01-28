@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
-  before_action :set_event, except: [:new, :create]
   before_action :set_organization
+  before_action :set_event, except: [:index, :new, :create]
+
+  def index
+    @events = @organization.events.order(date: :desc).page(current_page)
+  end
 
   def show
     @attendees = @event.attendees
@@ -45,11 +49,11 @@ class EventsController < ApplicationController
 
   private
     def set_event
-      @event = Event.find(params[:id])
+      @event = @organization.events.find(params[:id])
     end
 
     def set_organization
-      unless @organization = current_user.organizations.find(params[:organization_id])
+      unless @organization = current_user.organizations.find_by_id(params[:organization_id])
         redirect_to organizations_url
       end
     end

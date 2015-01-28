@@ -44,7 +44,7 @@ class TextMessage::RegistrationProcessorTest < ActiveSupport::TestCase
     registration = registrations(:michelle)
     text_message = stub(registration: registration, body: 'michelle@example.com')
 
-    text_message.expects(:respond_later).with("All set! You're checked in for Meeting.").once
+    text_message.expects(:respond_later).with("All set! You're checked in for CSC Meeting.").once
     assert_difference -> { Member.count }, 1 do
     assert_difference -> { registration.event.attendees.count }, 1 do
     assert_difference -> { Registration.count }, -1 do

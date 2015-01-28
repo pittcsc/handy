@@ -5,11 +5,11 @@ Rails.application.routes.draw do
 
   resources :organizations do
     resources :events do
-        member do
-          post :activate
-          post :deactivate
-        end
-     end
+      member do
+        post :activate
+        post :deactivate
+      end
+    end
   end
 
   resource :user
