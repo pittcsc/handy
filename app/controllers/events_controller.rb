@@ -26,13 +26,13 @@ class EventsController < ApplicationController
   def update
     @event.update!(event_params)
 
-    redirect_to @organization
+    redirect_to organization_events_url(@organization)
   end
 
   def destroy
     @event.destroy!
 
-    redirect_to @organization
+    redirect_to organization_events_url(@organization)
   end
 
   def activate

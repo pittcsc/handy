@@ -5,10 +5,6 @@ class OrganizationsController < ApplicationController
     @organizations = current_user.organizations
   end
 
-  def show
-    @events = @organization.events.order(date: :desc).page(current_page)
-  end
-
   def new
     @organization = Organization.new
   end

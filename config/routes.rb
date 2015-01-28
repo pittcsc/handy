@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   post 'text', to: 'sms/inbound_messages#create'
 
   resources :organizations do
+    # Showing an organization is displaying its events
+    get '', to: 'events#index'
+
     resources :events do
       member do
         post :activate
