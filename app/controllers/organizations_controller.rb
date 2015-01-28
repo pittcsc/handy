@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
     organization = Organization.create!(organization_params)
     organization.users.append(current_user)
 
-    redirect_to organization
+    redirect_to organization_events_url(organization)
   end
 
   def edit
