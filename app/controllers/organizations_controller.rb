@@ -20,7 +20,7 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    @organiztaion.update!(organization_params)
+    @organization.update!(organization_params)
 
     redirect_to organizations_url
   end

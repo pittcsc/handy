@@ -15,7 +15,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'index paginates' do
     create_paginated_events
-    get(:index, {'organization_id' => @organization})
+    get :index, organization_id: @organization
 
     assert_response :success
     assert_equal 30, assigns(:events).size
@@ -31,7 +31,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'index paginates with negative page number' do
     create_paginated_events
-    get(:index, {'organization_id' => @organization, 'page' => -100})
+    get :index, {organization_id: @organization, page: -100}
 
     assert_response :success
     assert_equal 30, assigns(:events).size
@@ -39,7 +39,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'index paginates with invalid page number' do
     create_paginated_events
-    get(:index, {'organization_id' => @organization, 'page' => 'foo'})
+    get :index, {organization_id: @organization, page: 'foo'}
 
     assert_response :success
     assert_equal 30, assigns(:events).size
