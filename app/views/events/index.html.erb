@@ -1,4 +1,7 @@
-<h1>Event List</h1>
+<h1><%= @organization.name %> Event List</h1>
+<%= link_to "Edit Organization", edit_organization_url(@organization) %>
+<br />
+<%= link_to "Delete Organization", organization_url(@organization), method: :delete, data: { confirm: "Are you sure you want to delete #{@organization.name}?" } %>
 
 <p>
   <strong>Phone number:</strong> <%= Rails.configuration.x.twilio[:phone_number] %>
@@ -20,15 +23,17 @@
       <td><%= event.name %></td>
       <td><%= event.date.strftime("%A, %B %e, %Y") %></td>
       <td><code><%= event.token %></code></td>
-      <td><%= link_to "Edit event", edit_event_path(event.id) %></td>
-      <td><%= toggle_event_button(event) %></td>
-      <td><%= link_to 'Delete event', event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %></td>
-      <td><%= link_to "Attendance", event_path(event) %></td>
+      <td><%= link_to "Edit event", edit_organization_event_path(@organization, event) %></td>
+      <td><%= toggle_event_button(@organization, event) %></td>
+      <td><%= link_to 'Delete event', organization_event_path(@organization, event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %></td>
+      <td><%= link_to "Attendance", organization_event_path(@organization, event) %></td>
     <% end %>
   <% end %>
 </table>
 
 <%= will_paginate @events %>
 
-<%= link_to "Create event", new_event_path %><br>
+<%= link_to "Create event", new_organization_event_path(@organization) %><br>
+<%= link_to "Back to organizations", organizations_url %><br>
 <%= link_to "Log out", logout_path %>
+

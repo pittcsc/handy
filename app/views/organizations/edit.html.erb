@@ -1,0 +1,8 @@
+<h1>Edit <%= @organization.name %></h1>
+
+<%= form_for @organization do |form| %>
+
+  Name: <%= form.text_field :name, class: 'form-control' %><br />
+  <%= form.submit "Update Organization", class: 'btn btn-primary' %>
+
+<% end %>

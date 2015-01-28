@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
+  before_action :set_organization
   before_action :set_event, except: [:index, :new, :create]
 
   def index
-    @events = Event.order(date: :desc).page(current_page)
+    @events = @organization.events.order(date: :desc).page(current_page)
   end
 
   def show
@@ -14,9 +15,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    event = Event.create!(event_params)
+    event = @organization.events.create!(event_params)
 
-    redirect_to event
+    redirect_to organization_event_url(@organization, event)
   end
 
   def edit
@@ -25,13 +26,13 @@ class EventsController < ApplicationController
   def update
     @event.update!(event_params)
 
-    redirect_to events_url
+    redirect_to organization_events_url(@organization)
   end
 
   def destroy
     @event.destroy!
 
-    redirect_to events_url
+    redirect_to organization_events_url(@organization)
   end
 
   def activate
@@ -48,7 +49,13 @@ class EventsController < ApplicationController
 
   private
     def set_event
-      @event = Event.find(params[:id])
+      @event = @organization.events.find(params[:id])
+    end
+
+    def set_organization
+      unless @organization = current_user.organizations.find_by_id(params[:organization_id])
+        redirect_to organizations_url
+      end
     end
 
     def event_params

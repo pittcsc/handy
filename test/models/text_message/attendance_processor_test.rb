@@ -3,10 +3,10 @@ require 'test_helper'
 class TextMessage::AttendanceProcessorTest < ActiveSupport::TestCase
   test 'processes with a valid token for an active event' do
     member = members(:michael)
-    event = events(:meeting)
+    event = events(:meetingCsc)
     text_message = stub(member: member, body: event.token)
 
-    text_message.expects(:respond_later).with("Thanks, Michael. You're checked in for Meeting.").once
+    text_message.expects(:respond_later).with("Thanks, Michael. You're checked in for CSC Meeting.").once
     assert_difference -> { event.attendees.count }, 1 do
       TextMessage::AttendanceProcessor.process(text_message)
     end
