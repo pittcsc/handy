@@ -11,39 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215163401) do
+ActiveRecord::Schema.define(version: 20150201234830) do
 
-  create_table "accesses", force: true do |t|
-    t.integer "user_id",         limit: 4
-    t.integer "organization_id", limit: 4
+  create_table "accesses", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.integer  "organization_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "accesses", ["user_id", "organization_id"], name: "index_accesses_on_user_id_and_organization_id", unique: true, using: :btree
 
-  create_table "attendances", force: true do |t|
-    t.integer "member_id", limit: 4
-    t.integer "event_id",  limit: 4
+  create_table "attendances", force: :cascade do |t|
+    t.integer  "member_id",  limit: 4
+    t.integer  "event_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "attendances", ["event_id", "member_id"], name: "index_attendances_on_event_id_and_member_id", unique: true, using: :btree
 
-  create_table "event_ownerships", force: true do |t|
-    t.integer "event_id",        limit: 4
-    t.integer "organization_id", limit: 4
+  create_table "event_ownerships", force: :cascade do |t|
+    t.integer  "event_id",        limit: 4
+    t.integer  "organization_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "event_ownerships", ["event_id", "organization_id"], name: "index_event_ownerships_on_event_id_and_organization_id", unique: true, using: :btree
 
-  create_table "events", force: true do |t|
-    t.string  "name",   limit: 255
-    t.date    "date"
-    t.boolean "active", limit: 1,   default: false, null: false
-    t.string  "token",  limit: 255,                 null: false
+  create_table "events", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.date     "date"
+    t.boolean  "active",     limit: 1,   default: false, null: false
+    t.string   "token",      limit: 255,                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree
 
-  create_table "members", force: true do |t|
+  create_table "members", force: :cascade do |t|
     t.string "name",  limit: 255
     t.string "email", limit: 255
     t.string "phone", limit: 255, null: false
@@ -51,11 +59,13 @@ ActiveRecord::Schema.define(version: 20141215163401) do
 
   add_index "members", ["phone"], name: "index_members_on_phone", using: :btree
 
-  create_table "organizations", force: true do |t|
-    t.string "name", limit: 255
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "registrations", force: true do |t|
+  create_table "registrations", force: :cascade do |t|
     t.integer  "event_id",      limit: 4,   null: false
     t.string   "phone_number",  limit: 255, null: false
     t.string   "name",          limit: 255
@@ -67,14 +77,14 @@ ActiveRecord::Schema.define(version: 20141215163401) do
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id", using: :btree
   add_index "registrations", ["phone_number"], name: "index_registrations_on_phone_number", using: :btree
 
-  create_table "text_messages", force: true do |t|
+  create_table "text_messages", force: :cascade do |t|
     t.string   "phone_number", limit: 255, null: false
     t.string   "body",         limit: 255, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 255,                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
