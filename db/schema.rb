@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201234830) do
+ActiveRecord::Schema.define(version: 20150202001415) do
 
   create_table "accesses", force: :cascade do |t|
     t.integer  "user_id",         limit: 4
     t.integer  "organization_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "accesses", ["user_id", "organization_id"], name: "index_accesses_on_user_id_and_organization_id", unique: true, using: :btree
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20150201234830) do
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",  limit: 4
     t.integer  "event_id",   limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "attendances", ["event_id", "member_id"], name: "index_attendances_on_event_id_and_member_id", unique: true, using: :btree
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20150201234830) do
   create_table "event_ownerships", force: :cascade do |t|
     t.integer  "event_id",        limit: 4
     t.integer  "organization_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "event_ownerships", ["event_id", "organization_id"], name: "index_event_ownerships_on_event_id_and_organization_id", unique: true, using: :btree
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20150201234830) do
     t.date     "date"
     t.boolean  "active",     limit: 1,   default: false, null: false
     t.string   "token",      limit: 255,                 null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "events", ["token"], name: "index_events_on_token", unique: true, using: :btree
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20150201234830) do
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20150201234830) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 255,                 null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "password_digest", limit: 255,                 null: false
     t.boolean  "admin",           limit: 1,   default: false, null: false
   end
