@@ -23,6 +23,9 @@ gem 'twilio-ruby'
 # Encryption
 gem 'bcrypt'
 
+# PDF Generation
+gem 'wicked_pdf'
+
 group :development do
   gem 'spring'
 
