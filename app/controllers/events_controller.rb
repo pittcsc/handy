@@ -8,6 +8,12 @@ class EventsController < ApplicationController
 
   def show
     @attendees = @event.attendees
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "pdf.html"
+      end
+    end
   end
 
   def new
@@ -45,6 +51,10 @@ class EventsController < ApplicationController
     @event.update!(active: false)
 
     redirect_to :back
+  end
+
+  def pdf
+    @attendees = @event.attendees
   end
 
   private

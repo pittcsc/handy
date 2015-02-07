@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Handy</title>
+
+  <%= wicked_pdf_stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= wicked_pdf_javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container" style="padding-top: 50px;">
+    <h2><%= @event.name %> Attendance</h2>
+    <% if @attendees.any? %>
+    <p><%= pluralize @attendees.count, 'member' %> checked in for this event:</p>
+
+    <ul>
+        <% @attendees.each do |attendee| %>
+        <li><%= attendee.name %></li>
+        <% end %>
+    </ul>
+    <% else %>
+    <p>No members have checked in for this event yet.</p>
+    <% end %>
+  </div>
+</body>
+</html>
+
