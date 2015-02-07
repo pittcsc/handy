@@ -8,10 +8,11 @@ class EventsController < ApplicationController
 
   def show
     @attendees = @event.attendees
+
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "pdf.html"
+        render pdf: @event.name
       end
     end
   end
