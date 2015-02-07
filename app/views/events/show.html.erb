@@ -15,4 +15,5 @@
   <p>No members have checked in for this event yet.</p>
 <% end %>
 
+<h4><%= link_to "Print PDF", organization_event_url(@organization, @event, format: :pdf) %></h4>
 <h4><%= link_to "Back to event list", organization_events_url(@organization) %></h4>
