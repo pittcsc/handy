@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # Authentication
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy'
+  post 'logout' => 'sessions#destroy'
 
   namespace :admin do
     mount Resque::Server, at: 'resque'
