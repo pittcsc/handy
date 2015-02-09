@@ -2,7 +2,7 @@
 
 Handy takes attendance at events via SMS.
 
-[![Travis CI][1]][2]
+[![Travis CI][travis_badge]][travis]
 
 
 ## Getting Started
@@ -10,6 +10,7 @@ Handy takes attendance at events via SMS.
 Install the system services Handy relies on:
 
 * MySQL 5.6
+* [wkhtmltopdf][wkhtmltopdf]
 
 Clone the Handy repository and run `bin/setup`:
 
@@ -22,5 +23,6 @@ bin/setup
 That's it!
 
 
-[1]: https://travis-ci.org/Pitt-CSC/handy.svg?branch=master
-[2]: https://travis-ci.org/Pitt-CSC/handy
+[travis_badge]: https://travis-ci.org/Pitt-CSC/handy.svg?branch=master
+[travis]: https://travis-ci.org/Pitt-CSC/handy
+[wkhtmltopdf]: http://wkhtmltopdf.org/
