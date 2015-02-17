@@ -7,12 +7,14 @@ class EventsController < ApplicationController
   end
 
   def show
-    @attendees = @event.attendees
+    if stale? last_modified: @event.attendances_updated_at
+      @attendees = @event.attendees
 
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: @event.name
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: @event.name
+        end
       end
     end
   end
