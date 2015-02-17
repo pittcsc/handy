@@ -46,15 +46,15 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'show' do
-    get :show, id: events(:meetingCsc), organization_id: @organization
+    get :show, id: events(:csc_meeting), organization_id: @organization
 
     assert_response :success
-    assert_equal events(:meetingCsc).attendees, assigns(:attendees)
+    assert_equal events(:csc_meeting).attendees, assigns(:attendees)
   end
 
   test 'show checks freshness' do
-    request.headers['If-Modified-Since'] = events(:meetingCsc).updated_at.httpdate
-    get :show, organization_id: @organization.id, id: events(:meetingCsc)
+    request.headers['If-Modified-Since'] = events(:csc_meeting).updated_at.httpdate
+    get :show, organization_id: @organization.id, id: events(:csc_meeting)
 
     assert_response :not_modified
   end
@@ -77,23 +77,23 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'edit' do
-    get :edit, id: events(:meetingCsc), organization_id: @organization
+    get :edit, id: events(:csc_meeting), organization_id: @organization
 
     assert_response :success
   end
 
   test 'update' do
-    put :update, id: events(:meetingCsc), event: { name: 'New name' }, organization_id: @organization
+    put :update, id: events(:csc_meeting), event: { name: 'New name' }, organization_id: @organization
 
     assert_redirected_to organization_events_url(@organization)
-    assert_equal 'New name', events(:meetingCsc).reload.name
+    assert_equal 'New name', events(:csc_meeting).reload.name
   end
 
   test 'destroy' do
-    delete :destroy, id: events(:meetingCsc), organization_id: @organization
+    delete :destroy, id: events(:csc_meeting), organization_id: @organization
 
     assert_redirected_to organization_events_url(@organization)
-    assert_not Event.find_by_id(events(:meetingCsc).id)
+    assert_not Event.find_by_id(events(:csc_meeting).id)
   end
 
   test 'activate' do
@@ -106,10 +106,10 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'deactivate' do
     request.env['HTTP_REFERER'] = organization_events_url(@organization)
-    post :deactivate, id: events(:meetingCsc), organization_id: @organization
+    post :deactivate, id: events(:csc_meeting), organization_id: @organization
 
     assert_redirected_to organization_events_url(@organization)
-    assert_not events(:meetingCsc).reload.active?
+    assert_not events(:csc_meeting).reload.active?
   end
 
   private

@@ -1,4 +1,4 @@
-meetingCsc:
+csc_meeting:
   name: CSC Meeting
   date: 2014-11-01
   active: true
@@ -9,9 +9,3 @@ workshop:
   date: 2014-11-01
   active: false
   token: debt cinema
-
-meetingWics:
-  name: WiCS Meeting
-  date: 2014-11-05
-  active: false
-  token: secretary butter

@@ -1,11 +1,11 @@
 rashid:
-  event: meetingCsc
+  event: csc_meeting
   name:
   email_address:
   phone_number: +15553930125
 
 michelle:
-  event: meetingCsc
+  event: csc_meeting
   name: Michelle Stark
   email_address:
   phone_number: +15551178989

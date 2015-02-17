@@ -1,11 +1,7 @@
-first:
-  event: meetingCsc
+csc_meeting_owned_by_csc:
+  event: csc_meeting
   organization: csc
 
-second:
+workshop_owned_by_csc:
   event: workshop
   organization: csc
-
-third:
-  event: meetingWics
-  organization: wics

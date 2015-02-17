@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = events(:meetingCsc)
+    @event = events(:csc_meeting)
   end
 
   test 'requires name' do
