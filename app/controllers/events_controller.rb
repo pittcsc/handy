@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    if stale? last_modified: @event.attendances_updated_at
+    if stale? @event
       @attendees = @event.attendees
 
       respond_to do |format|

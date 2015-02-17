@@ -52,6 +52,13 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal events(:meetingCsc).attendees, assigns(:attendees)
   end
 
+  test 'show checks freshness' do
+    request.headers['If-Modified-Since'] = events(:meetingCsc).updated_at.httpdate
+    get :show, organization_id: @organization.id, id: events(:meetingCsc)
+
+    assert_response :not_modified
+  end
+
   test 'new' do
     get :new, organization_id: @organization
 
