@@ -17,7 +17,7 @@ set :rbenv_custom_path, '/opt/rbenv'
 
 # Configuration
 set :linked_files, %w(config/database.yml config/secrets.yml config/twilio.yml)
-set :linked_dirs, %w(log)
+set :linked_dirs, %w(tmp log)
 
 namespace :deploy do
   after :publishing, :restart
