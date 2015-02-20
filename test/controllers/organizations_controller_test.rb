@@ -2,40 +2,41 @@ require 'test_helper'
 
 class OrganizationsControllerTest < ActionController::TestCase
   setup do
-    log_in_as users(:jeff)
+    @user = users(:jeff)
     @organization = organizations(:csc)
+
+    log_in_as @user
   end
 
   test 'index' do
     get :index
 
     assert_response :success
-    assert_equal users(:jeff).organizations, assigns(:organizations)
+    @user.organizations.each do |organization|
+      assert_select 'li', text: organization.name
+    end
   end
 
   test 'new' do
     get :new
 
     assert_response :success
-    assert assigns(:organization).new_record?
   end
 
   test 'create' do
-    post :create, organization: { name: "Joel's Club" }
+    assert_difference -> { Organization.count } do
+      post :create, organization: { name: "Joel's Club" }
+    end
 
     assert_redirected_to organization_events_url(Organization.last)
     assert_equal "Joel's Club", Organization.last.name
-
-    # Make sure creating user has access to the organization
-    assert_equal Access.last.organization_id, Organization.last.id
-    assert_equal Access.last.user_id, users(:jeff).id
+    assert_includes Organization.last.users, @user
   end
 
   test 'edit' do
     get :edit, id: @organization
 
     assert_response :success
-    assert_equal @organization, assigns(:organization)
   end
 
   test 'update' do
@@ -46,7 +47,9 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test 'destroy' do
-    delete :destroy, id: @organization
+    assert_difference -> { Organization.count }, -1 do
+      delete :destroy, id: @organization
+    end
 
     assert_redirected_to organizations_url
     assert_not Organization.find_by_id(@organization)

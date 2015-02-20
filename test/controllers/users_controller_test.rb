@@ -9,7 +9,6 @@ class UsersControllerTest < ActionController::TestCase
   test 'edit' do
     get :edit
     assert_response :success
-    assert_equal @user, assigns(:user)
   end
 
   test 'update' do
@@ -21,7 +20,5 @@ class UsersControllerTest < ActionController::TestCase
   test 'update with invalid attributes' do
     post :update, user: { password: 'new password', password_confirmation: '' }
     assert_response :success
-    assert_template :edit
-    assert_equal @user, assigns(:user)
   end
 end
