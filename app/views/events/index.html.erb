@@ -1,7 +1,11 @@
 <h1><%= @organization.name %> Event List</h1>
-<%= link_to "Edit Organization", edit_organization_url(@organization) %>
-<br />
-<%= link_to "Delete Organization", organization_url(@organization), method: :delete, data: { confirm: "Are you sure you want to delete #{@organization.name}?" } %>
+
+<ul>
+  <li><%= link_to "Edit Organization", edit_organization_url(@organization) %></li>
+  <li><%= link_to "Delete Organization", organization_url(@organization), method: :delete, data: { confirm: "Are you sure you want to delete #{@organization.name}?" } %></li>
+  <li><%= link_to "Create event", new_organization_event_path(@organization) %></li>
+  <li><%= link_to "Back to organizations", organizations_url %></li>
+</ul>
 
 <p>
   <strong>Phone number:</strong> <%= Rails.configuration.x.twilio[:phone_number] %>
@@ -35,6 +39,3 @@
 </table>
 
 <%= will_paginate @events %>
-
-<%= link_to "Create event", new_organization_event_path(@organization) %><br>
-<%= link_to "Back to organizations", organizations_url %><br>
