@@ -7,8 +7,8 @@ class Attendance < ActiveRecord::Base
   private
 
   def save_memberships
-    self.event.organizations.each do |o|
-      Membership.find_or_create-by!(member: self.member, organization: o)
+    event.organizations.each do |o|
+      Membership.find_or_create_by!(member: member, organization: o)
     end
   end
 end
