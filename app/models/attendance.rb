@@ -2,7 +2,7 @@ class Attendance < ActiveRecord::Base
   belongs_to :member, required: true
   belongs_to :event, required: true, touch: true
 
-  after_create: :save_memberships
+  after_create :save_memberships
 
   private
 
