@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217172404) do
+ActiveRecord::Schema.define(version: 20150305011905) do
 
   create_table "accesses", force: :cascade do |t|
     t.integer  "user_id",         limit: 4
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20150217172404) do
   end
 
   add_index "members", ["phone"], name: "index_members_on_phone", using: :btree
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "member_id",       limit: 4
+    t.integer  "organization_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name",       limit: 255
