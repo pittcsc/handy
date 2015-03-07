@@ -56,10 +56,6 @@ class EventsController < ApplicationController
     redirect_to :back
   end
 
-  def pdf
-    @attendees = @event.attendees
-  end
-
   private
     def set_event
       @event = @organization.events.find(params[:id])
