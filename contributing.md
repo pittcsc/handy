@@ -84,18 +84,17 @@ default: &default
   ```
  That's because when I configured MySQL on the base box I gave the root user the password `root`.
 
-
- ### Setting Up Twilio
+### Setting Up Twilio
 
  Handy uses Twilio to send and receive text messages. You'll need your own Twilio account to work with Handy. [Go to their website](https://www.twilio.com/) and make an account. You won't need a credit card.
 
  Once you've signed up for a trial account, [find your account credentials](https://www.twilio.com/user/account/developer-tools/test-credentials). Use them to fill in `twilio.yml`.
 
- ## Make Sure The Right Gems Are Installed
+## Make Sure The Right Gems Are Installed
 
  In `/vagrant/handy`, run `bundle install` to make sure all of the Ruby gems Handy needs are installed on your VM. I installed them myself on the base box, but as the project changes, Handy will use new gems and the base box will become out of date.
 
- ## Prepare the Database
+## Prepare the Database
 
 We'll need to create the tables that Handy needs in the database. 
 
@@ -105,18 +104,19 @@ We'll need to create the tables that Handy needs in the database.
  ```
 That should do it.
 
- ## Run the server
+## Run the server
 
  You're ready to start! From `/vagrant/handy`, execute `rails server -b 0.0.0.0`. You wouldn't need `-b 0.0.0.0` if you weren't running the server from a VM. By default, the rails server will bind to 127.0.0.1 (aka Localhost). That will get the HTTP responses "stuck" in the VM and not let them through to your host machine. Binding to 0.0.0.0 prevents that.
 
  Once you've started your server, open up a web browser on the host machine and enter `Localhost:3000` into the address bar. If you see Handy's login page, congratulations! You've set up your development environment!
 
- ## Now What?
+## Now What?
 
  This is as far as I can take you. Check out the issue tracker to see if there are bugs or enhancements you can work on. Or maybe add something you think would be cool. Good luck!
 
-
+## Footnotes
 
 *(Link to page where I detail configuration of base box forthcoming.)
+
 ** But please don't put it in production like that.
 
