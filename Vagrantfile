@@ -1,10 +1,15 @@
-Vagrant.configure(2) do |config|
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # This instructs Vagrant to grab the base box from the "Atlas" service that's hosting it for us.
   config.vm.box = "WillEngler/handy"
 
   # This makes sure that when the Rails server serves a webpage on the VM, it will get passed on to the host.
   config.vm.network :forwarded_port, guest: 3000, host: 3000
+
+  # Run provisioning script that will insert default config YAML files
+  config.vm.provision "shell", path: "default-config.sh"
   
   config.vm.provider "virtualbox" do |v|
       # These lines solve connection issues Ubuntu VMs run into sometimes.
