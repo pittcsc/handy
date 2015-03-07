@@ -7,6 +7,8 @@ Handy takes attendance at events via SMS.
 
 ## Getting Started
 
+If you need to build your environment from the ground up, read contributing.md. Else, read on.
+
 Install the system services Handy relies on:
 
 * MySQL 5.6
