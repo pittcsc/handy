@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 3000, host: 3000
 
   # Run provisioning script that will insert default config YAML files
-  config.vm.provision "shell", path: "./bin/provision/default-config.sh"
+  config.vm.provision "shell", path: "./bin/provision"
   
   config.vm.provider "virtualbox" do |v|
       # These lines solve connection issues Ubuntu VMs run into sometimes.

@@ -14,7 +14,7 @@ Install the system services Handy relies on:
 * MySQL 5.6
 * [wkhtmltopdf][wkhtmltopdf]
 
-Clone the Handy repository and run `bin/provision/setup`:
+Clone the Handy repository and run `bin/setup`:
 
 ```bash
 git clone git@github.com:Pitt-CSC/handy.git
