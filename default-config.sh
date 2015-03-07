@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 FILE="config/database.yml"
 
@@ -34,8 +34,5 @@ test:
   phone_number: # Fill this in
 EOM
 
-<<<<<<< HEAD
 cp ./config/secrets.yml.sample ./config/secrets.yml
-=======
-cp ./config/secrets.yml.sample ./config/secrets.yml
->>>>>>> 444dc9e08512dabf0697ae0b2a811a93060bf51d
+
