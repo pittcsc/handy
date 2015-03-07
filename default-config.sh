@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE="config/database.yml"
+FILE="/vagrant/config/database.yml"
 
 cat <<EOM >$FILE
 default: &default
@@ -19,7 +19,7 @@ test:
   database: handy_test
 EOM
 
-FILE="config/twilio.yml"
+FILE="/vagrant/config/twilio.yml"
 
 cat <<EOM >$FILE
 
@@ -34,5 +34,4 @@ test:
   phone_number: # Fill this in
 EOM
 
-cp ./config/secrets.yml.sample ./config/secrets.yml
-
+cp /vagrant/config/secrets.yml.sample /vagrant/config/secrets.yml
