@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+set -e
+
+with_rbenv() {
+  which rbenv >/dev/null 2>&1 && rbenv "$@"
+}
+
+# Set default options
+VERBOSE=0
+KEEP_DB=0
+
+# Handle command line options
+while [ $# -gt 0 ]; do
+  key="$1"
+  shift
+
+  case "$key" in
+    -v|--verbose)
+      VERBOSE=1
+      ;;
+    --keep-db)
+      KEEP_DB=1
+      ;;
+    *)
+      echo "Invalid option: $key"
+      exit 1
+      ;;
+  esac
+done
+
+echo "Setting up Handy for development:"
+
+# Enable or disable verbose output
+if [ $VERBOSE -eq 1 ]; then
+  exec 3> >(sed 's/^/    /')
+else
+  exec 3>/dev/null
+  exec 4>&1
+  trap 'echo "Setup failed! Run \`bin/setup -v\` to see error messages" >&4' ERR
+fi
+
+# Locate application root and work from it
+APP_ROOT="$( cd "$(dirname "$0")/.."; pwd )"
+cd "$APP_ROOT"
+
+# Use binstubs
+export PATH="$APP_ROOT/bin:$PATH"
+
+# Clear logs and temporary files
+echo "* Clearing logs and temporary files"
+{
+  rm -rf log/* tmp/*
+} >&3 2>&1
+
+# Install dependencies
+echo "* Installing dependencies"
+echo "  - Ruby"
+{
+  # rbenv
+  with_rbenv install --skip-existing
+} >&3 2>&1
+echo "  - Gems"
+{
+  # Bundler
+  gem list -i bundler >/dev/null 2>&1 || gem install bundler
+  with_rbenv rehash
+
+  # Bundled gems
+  bundle install
+  with_rbenv rehash
+} >&3 2>&1
+
+if [ $KEEP_DB -eq 0 ]; then
+  # Rebuild the database
+  echo "* Rebuilding database"
+  {
+    rake db:drop db:create db:schema:load --trace
+  } >&3 2>&1
+
+  # Load seed data
+  echo "* Loading seed data"
+  {
+    rake db:seed --trace
+  } >&3 2>&1
+fi
+
+# Restart Spring
+echo "* Restarting Spring"
+{
+  spring stop
+} >&3 2>&1
+
+echo "Setup completed!"
