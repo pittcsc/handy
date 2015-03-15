@@ -24,5 +24,4 @@ Rails.application.routes.draw do
   end
 
   get 'monitoring/up', to: 'monitoring#up'
-  resource :boom
 end
