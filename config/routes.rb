@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     mount Resque::Server, at: 'resque'
   end
 
-  get 'monitoring/up', to: 'monitoring#up'
+  mount Easymon::Engine, at: 'monitoring/up'
 end

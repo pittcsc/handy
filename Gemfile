@@ -26,6 +26,9 @@ gem 'bcrypt'
 # PDF Generation
 gem 'wicked_pdf'
 
+# Monitoring
+gem 'easymon', '~> 1.2.3'
+
 group :development do
   gem 'spring'
 
