@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   namespace :twilio do
     resources :text_messages
   end
-  post 'text', to: 'twilio/text_messages#create'
 
   namespace :admin do
     mount Resque::Server, at: 'resque'
