@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   resource :user
 
   # Authentication
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  post 'logout' => 'sessions#destroy'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  post 'logout', to: 'sessions#destroy'
 
   namespace :twilio do
     resources :text_messages
