@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Run tests in random order.
   config.active_support.test_order = :random
+
+  # Simulate enqueuing jobs without performing them.
+  config.active_job.queue_adapter = :test
 end
