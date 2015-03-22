@@ -7,6 +7,6 @@ class Twilio::TextMessagesController < Twilio::BaseController
 
   private
     def text_message_attributes
-      { phone_number: params[:From], body: params[:Body].strip }
+      { phone_number: params[:From], body: params[:Body] }
     end
 end

@@ -36,4 +36,10 @@ class TextMessageTest < ActiveSupport::TestCase
 
     text_messages(:michael_checking_in).respond_later('Message received!')
   end
+
+  test 'strips body' do
+    text_message = TextMessage.create!(phone_number: '+15558675309', body: '  hello, my friend!   ')
+
+    assert_equal 'hello, my friend!', text_message.body
+  end
 end

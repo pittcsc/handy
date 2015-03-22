@@ -1,4 +1,6 @@
 class TextMessage < ActiveRecord::Base
+  before_save :normalize_body
+
   def member
     @member ||= Member.find_by_phone(phone_number)
   end
@@ -24,4 +26,9 @@ class TextMessage < ActiveRecord::Base
   def respond_later(response_body)
     Sms::DeliveryJob.perform_later(phone_number, response_body)
   end
+
+  private
+    def normalize_body
+      self.body = body.strip
+    end
 end

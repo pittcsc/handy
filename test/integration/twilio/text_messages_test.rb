@@ -10,12 +10,6 @@ class Twilio::TextMessagesTest < ActionDispatch::IntegrationTest
     assert_equal 'hello!', TextMessage.last.body
   end
 
-  test 'receiving a text message with a padded body from Twilio' do
-    post_with_signature twilio_text_messages_url, From: '+15558675309', Body: '  hello, my friend!   '
-    assert_response :ok
-    assert_equal 'hello, my friend!', TextMessage.last.body
-  end
-
   test 'receiving a text message requires a valid Twilio signature' do
     assert_no_difference -> { TextMessage.count } do
       post twilio_text_messages_url, From: '+15558675309', Body: 'hello!'
