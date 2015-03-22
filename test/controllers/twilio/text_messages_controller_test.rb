@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Sms::InboundMessagesControllerTest < ActionController::TestCase
+class Sms::TextMessagesControllerTest < ActionController::TestCase
   test 'create' do
     expects_signature_validation
     expects_text_message_processing
