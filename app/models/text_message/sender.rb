@@ -1,9 +1,9 @@
-class TextMessage::Deliverer
+class TextMessage::Sender
   def initialize(text_message)
     @text_message = text_message
   end
 
-  def deliver
+  def send
     Twilio::REST::Client.new.messages.create \
       from: Rails.configuration.x.twilio[:phone_number],
       to: @text_message.phone_number,

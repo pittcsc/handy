@@ -16,7 +16,7 @@ class TextMessage < ActiveRecord::Base
     if incoming?
       Receiver.for(self).receive
     else
-      Deliverer.new(self).deliver
+      Sender.new(self).send
     end
 
     destroy!
