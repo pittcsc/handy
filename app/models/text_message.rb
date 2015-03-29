@@ -22,7 +22,7 @@ class TextMessage < ActiveRecord::Base
     destroy!
   end
 
-  def respond_later(body)
+  def respond(body)
     self.class.outgoing.create!(phone_number: phone_number, body: body)
   end
 

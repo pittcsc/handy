@@ -1,5 +1,6 @@
 class TextMessage::Receiver
   attr_reader :text_message
+  delegate :respond, to: :text_message
 
   def self.for(text_message)
     if text_message.member.present?
@@ -19,23 +20,10 @@ class TextMessage::Receiver
 
   protected
     def with_active_event_by_token
-      if active_event_by_token
-        yield active_event_by_token
+      if event = Event.active.find_by_token(text_message.body.downcase)
+        yield event
       else
-        reject_invalid_event_token
+        respond "Oops! That doesn't look like a valid event code."
       end
-    end
-
-    def respond(response_body)
-      text_message.respond_later(response_body)
-    end
-
-  private
-    def active_event_by_token
-      @active_event_by_token ||= Event.active.find_by_token(text_message.body.downcase)
-    end
-
-    def reject_invalid_event_token
-      respond "Oops! That doesn't look like a valid event code."
     end
 end

@@ -20,9 +20,9 @@ class TextMessageTest < ActiveSupport::TestCase
   end
   uses_transaction :test_processes_later
 
-  test 'responds later' do
+  test 'responds' do
     assert_difference -> { TextMessage.outgoing.count } do
-      text_messages(:michael_checking_in).respond_later('Message received!')
+      text_messages(:michael_checking_in).respond('Message received!')
     end
   end
 
