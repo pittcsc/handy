@@ -14,10 +14,11 @@ class TextMessageTest < ActiveSupport::TestCase
   end
 
   test 'processes later' do
-    Sms::ProcessingJob.expects(:perform_later).with(text_messages(:michael_checking_in))
-
-    text_messages(:michael_checking_in).process_later
+    assert_enqueued_jobs 1 do
+      TextMessage.create!(phone_number: '+15558675309', body: 'checking in!')
+    end
   end
+  uses_transaction :test_processes_later
 
   test 'processes as check-in with member' do
     TextMessage::AttendanceProcessor.expects(:process).with(text_messages(:michael_checking_in)).once
