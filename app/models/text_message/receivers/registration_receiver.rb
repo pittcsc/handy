@@ -1,8 +1,8 @@
-class TextMessage
-  class RegistrationProcessor < Processor
+module TextMessage::Receivers
+  class RegistrationReceiver < TextMessage::Receiver
     delegate :registration, to: :text_message
 
-    def process
+    def receive
       if registration
         continue_registration
       else

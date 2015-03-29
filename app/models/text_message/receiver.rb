@@ -1,17 +1,20 @@
-class TextMessage::Processor
+class TextMessage::Receiver
   attr_reader :text_message
-  delegate :member, to: :text_message
 
-  def self.process(text_message)
-    new(text_message).process
+  def self.for(text_message)
+    if text_message.member.present?
+      TextMessage::Receivers::AttendanceReceiver.new(text_message)
+    else
+      TextMessage::Receivers::RegistrationReceiver.new(text_message)
+    end
   end
 
   def initialize(text_message)
     @text_message = text_message
   end
 
-  def process
-    raise NotImplementedError, "Subclasses of TextMessage::Processor must implement process"
+  def receive
+    raise NotImplementedError, "Subclasses of TextMessage::Receiver must implement receive"
   end
 
   protected

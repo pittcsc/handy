@@ -11,12 +11,7 @@ class TextMessage < ActiveRecord::Base
   end
 
   def process
-    if member
-      AttendanceProcessor.process(self)
-    else
-      RegistrationProcessor.process(self)
-    end
-
+    Receiver.for(self).receive
     destroy!
   end
 

@@ -20,18 +20,6 @@ class TextMessageTest < ActiveSupport::TestCase
   end
   uses_transaction :test_processes_later
 
-  test 'processes as check-in with member' do
-    TextMessage::AttendanceProcessor.expects(:process).with(text_messages(:michael_checking_in)).once
-
-    text_messages(:michael_checking_in).process
-  end
-
-  test 'processes as registration without member' do
-    TextMessage::RegistrationProcessor.expects(:process).with(text_messages(:rashid_checking_in)).once
-
-    text_messages(:rashid_checking_in).process
-  end
-
   test 'responds later' do
     Sms::DeliveryJob.expects(:perform_later).with(text_messages(:michael_checking_in).phone_number, 'Message received!')
 
