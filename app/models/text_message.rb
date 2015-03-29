@@ -1,4 +1,6 @@
 class TextMessage < ActiveRecord::Base
+  enum direction: [:incoming, :outgoing]
+
   before_save :normalize_body
   after_commit :process_later, on: :create
 
@@ -11,12 +13,17 @@ class TextMessage < ActiveRecord::Base
   end
 
   def process
-    Receiver.for(self).receive
+    if incoming?
+      Receiver.for(self).receive
+    else
+      Deliverer.new(self).deliver
+    end
+
     destroy!
   end
 
-  def respond_later(response_body)
-    Sms::DeliveryJob.perform_later(phone_number, response_body)
+  def respond_later(body)
+    self.class.outgoing.create!(phone_number: phone_number, body: body)
   end
 
   private

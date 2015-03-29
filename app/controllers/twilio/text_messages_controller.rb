@@ -1,6 +1,6 @@
 class Twilio::TextMessagesController < Twilio::BaseController
   def create
-    TextMessage.create!(text_message_attributes)
+    TextMessage.incoming.create!(text_message_attributes)
 
     head :ok
   end

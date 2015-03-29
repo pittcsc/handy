@@ -15,19 +15,19 @@ class TextMessageTest < ActiveSupport::TestCase
 
   test 'processes later' do
     assert_enqueued_jobs 1 do
-      TextMessage.create!(phone_number: '+15558675309', body: 'checking in!')
+      TextMessage.incoming.create!(phone_number: '+15558675309', body: 'checking in!')
     end
   end
   uses_transaction :test_processes_later
 
   test 'responds later' do
-    Sms::DeliveryJob.expects(:perform_later).with(text_messages(:michael_checking_in).phone_number, 'Message received!')
-
-    text_messages(:michael_checking_in).respond_later('Message received!')
+    assert_difference -> { TextMessage.outgoing.count } do
+      text_messages(:michael_checking_in).respond_later('Message received!')
+    end
   end
 
   test 'strips body' do
-    text_message = TextMessage.create!(phone_number: '+15558675309', body: '  hello, my friend!   ')
+    text_message = TextMessage.incoming.create!(phone_number: '+15558675309', body: '  hello, my friend!   ')
 
     assert_equal 'hello, my friend!', text_message.body
   end
