@@ -3,6 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   fixtures :all
 
   def valid_password

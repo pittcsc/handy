@@ -1,5 +1,8 @@
 class TextMessage < ActiveRecord::Base
+  enum direction: [:incoming, :outgoing]
+
   before_save :normalize_body
+  after_commit :process_later, on: :create
 
   def member
     @member ||= Member.find_by_phone(phone_number)
@@ -9,26 +12,26 @@ class TextMessage < ActiveRecord::Base
     @registration ||= Registration.find_by_phone_number(phone_number)
   end
 
-  def process_later
-    Sms::ProcessingJob.perform_later(self)
-  end
-
   def process
-    if member
-      AttendanceProcessor.process(self)
+    if incoming?
+      Receiver.for(self).receive
     else
-      RegistrationProcessor.process(self)
+      Sender.new(self).send
     end
 
     destroy!
   end
 
-  def respond_later(response_body)
-    Sms::DeliveryJob.perform_later(phone_number, response_body)
+  def respond(body)
+    self.class.outgoing.create!(phone_number: phone_number, body: body)
   end
 
   private
     def normalize_body
       self.body = body.strip
+    end
+
+    def process_later
+      TextMessageProcessingJob.perform_later(self)
     end
 end

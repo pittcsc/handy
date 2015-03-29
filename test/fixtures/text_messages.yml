@@ -1,7 +1,9 @@
 michael_checking_in:
+  direction: <%= TextMessage.directions[:incoming] %>
   phone_number: +15559036061
   body: mayonnaise fragrance
 
 rashid_checking_in:
+  direction: <%= TextMessage.directions[:incoming] %>
   phone_number: +15553930125
   body: mayonnaise fragrance
