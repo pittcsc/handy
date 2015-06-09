@@ -1,7 +1,7 @@
 # This config is valid only for Capistrano 3.2.1.
 lock '3.2.1'
 
-set :application, 'Handy'
+set :application, 'handy'
 set :deploy_to, '/u/apps/handy'
 set :keep_releases, 5
 

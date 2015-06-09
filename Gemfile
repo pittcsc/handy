@@ -39,16 +39,17 @@ group :development do
   # Testing
   gem 'guard'
   gem 'guard-minitest'
-
-  # Deployment
-  gem 'capistrano', '~> 3.2.1', require: false
-  gem 'capistrano-rbenv', require: false
-  gem 'capistrano-rails', require: false
 end
 
 group :test do
   gem 'rake'
   gem 'mocha', require: false
+end
+
+group :deployment do
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rails'
 end
 
 group :production do
