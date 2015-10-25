@@ -24,14 +24,14 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'generates token from two random words' do
-    Dictionary.expects(:sample).with(2).returns(['grape', 'thing'])
+    Dictionary.any_instance.expects(:sample).with(2).returns(['grape', 'thing'])
 
     event = Event.create!(name: 'Meeting', date: '2014-11-01')
     assert_equal 'grape thing', event.token
   end
 
   test 'tries 100 times to generate a unique token' do
-    Dictionary.expects(:sample).with(2).times(100).returns(['grape', 'thing'])
+    Dictionary.any_instance.expects(:sample).with(2).times(100).returns(['grape', 'thing'])
     Event.expects(:find_by_token).with('grape thing').times(100).returns(@event)
 
     assert_raises RuntimeError do

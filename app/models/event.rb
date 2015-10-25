@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   private
     def generate_unique_token
       100.times do
-        self.token = Dictionary.sample(2).join(' ')
+        self.token = Dictionary.instance.sample(2).join(' ')
         return unless self.class.find_by_token(token)
       end
 
