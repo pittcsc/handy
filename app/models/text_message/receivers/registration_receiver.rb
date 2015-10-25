@@ -2,6 +2,10 @@ module TextMessage::Receivers
   class RegistrationReceiver < TextMessage::Receiver
     delegate :registration, to: :text_message
 
+    def self.accept?(text_message)
+      !text_message.member.present?
+    end
+
     def receive
       if registration
         continue_registration

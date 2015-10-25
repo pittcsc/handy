@@ -1,5 +1,9 @@
 module TextMessage::Receivers
   class AttendanceReceiver < TextMessage::Receiver
+    def self.accept?(text_message)
+      text_message.member.present?
+    end
+
     def receive
       with_active_event_by_token do |event|
         create_attendance event
