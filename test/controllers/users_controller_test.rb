@@ -12,13 +12,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'update' do
-    post :update, user: { password: 'new password', password_confirmation: 'new password' }
+    post :update, params: { user: { password: 'new password', password_confirmation: 'new password' } }
     assert_redirected_to root_url
     assert @user.reload.authenticate('new password')
   end
 
   test 'update with invalid attributes' do
-    post :update, user: { password: 'new password', password_confirmation: '' }
+    post :update, params: { user: { password: 'new password', password_confirmation: '' } }
     assert_response :success
   end
 end

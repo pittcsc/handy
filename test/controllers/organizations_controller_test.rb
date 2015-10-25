@@ -25,7 +25,7 @@ class OrganizationsControllerTest < ActionController::TestCase
 
   test 'create' do
     assert_difference -> { Organization.count } do
-      post :create, organization: { name: "Joel's Club" }
+      post :create, params: { organization: { name: "Joel's Club" } }
     end
 
     assert_redirected_to organization_events_url(Organization.last)
@@ -34,13 +34,13 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test 'edit' do
-    get :edit, id: @organization
+    get :edit, params: { id: @organization }
 
     assert_response :success
   end
 
   test 'update' do
-    put :update, id: @organization, organization: { name: "George's Club" }
+    put :update, params: { id: @organization, organization: { name: "George's Club" } }
 
     assert_redirected_to organization_events_url(@organization)
     assert_equal "George's Club", @organization.reload.name
@@ -48,7 +48,7 @@ class OrganizationsControllerTest < ActionController::TestCase
 
   test 'destroy' do
     assert_difference -> { Organization.count }, -1 do
-      delete :destroy, id: @organization
+      delete :destroy, params: { id: @organization }
     end
 
     assert_redirected_to organizations_url
