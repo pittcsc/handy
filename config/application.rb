@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Handy
   class Application < Rails::Application
+    config.active_record.raise_in_transactional_callbacks = true
+
     config.x.twilio = config_for(:twilio).symbolize_keys
   end
 end
