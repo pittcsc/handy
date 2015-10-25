@@ -22,7 +22,7 @@ class Twilio::TextMessagesTest < ActionDispatch::IntegrationTest
       post path, params: params, headers: headers.to_h.merge({ 'X-Twilio-Signature' => build_signature_for(path, params) }), **kwargs
     end
 
-    def build_signature_for(path, params = nil)
+    def build_signature_for(path, params)
       Twilio::Util::RequestValidator.new.build_signature_for(path, params)
     end
 end
