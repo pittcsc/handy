@@ -3,10 +3,12 @@ module TextMessage::Receivable
 
   private
     def receive
-      receiver_class.new(self).receive
+      receiver_classes.each do |klass|
+        klass.new(self).receive
+      end
     end
 
-    def receiver_class
-      RECEIVERS.find { |klass| klass.accept?(self) }
+    def receiver_classes
+      RECEIVERS.select { |klass| klass.accept?(self) }
     end
 end
