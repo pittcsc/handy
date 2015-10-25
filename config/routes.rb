@@ -21,9 +21,5 @@ Rails.application.routes.draw do
     resources :text_messages
   end
 
-  namespace :admin do
-    mount Resque::Server, at: 'resque'
-  end
-
   mount Easymon::Engine, at: 'monitoring/up'
 end

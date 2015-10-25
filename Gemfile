@@ -1,11 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+# Ruby on Rails
+gem 'rails', github: 'rails/rails'
+gem 'rack', github: 'rack/rack'
+gem 'arel', github: 'rails/arel'
+gem 'rails-controller-testing'
+
+# Data
 gem 'mysql2'
+gem 'redis'
 
 # Plugins
 gem 'turbolinks'
-gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate', github: 'kirs/will_paginate', branch: 'fix/i18n-path'
 
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
@@ -13,7 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass'
 
 # Background Jobs
-gem 'redis-rails'
 gem 'resque-pool'
 gem 'resque-scheduler'
 
