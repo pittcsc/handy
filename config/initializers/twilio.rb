@@ -1,5 +1,3 @@
-require 'twilio-ruby'
-
 Rails.configuration.x.twilio = Rails.application.config_for(:twilio).symbolize_keys
 
 Twilio.configure do |config|
