@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class TextMessage::Receivers::RegistrationReceiverTest < ActiveSupport::TestCase
+class TextMessage::Receivable::RegistrationReceiverTest < ActiveSupport::TestCase
   test 'receives with a new registrant and a valid token for an active event' do
     event = events(:csc_meeting)
     text_message = stub(phone_number: '+15557826081', registration: nil, body: event.token)
 
     text_message.expects(:respond).with("It looks like this is your first time checking in. What's your name?").once
     assert_difference -> { event.registrations.count }, 1 do
-      TextMessage::Receivers::RegistrationReceiver.new(text_message).receive
+      TextMessage::Receivable::RegistrationReceiver.new(text_message).receive
     end
   end
 
@@ -17,7 +17,7 @@ class TextMessage::Receivers::RegistrationReceiverTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Registration.count } do
-      TextMessage::Receivers::RegistrationReceiver.new(text_message).receive
+      TextMessage::Receivable::RegistrationReceiver.new(text_message).receive
     end
   end
 
@@ -27,7 +27,7 @@ class TextMessage::Receivers::RegistrationReceiverTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Registration.count } do
-      TextMessage::Receivers::RegistrationReceiver.new(text_message).receive
+      TextMessage::Receivable::RegistrationReceiver.new(text_message).receive
     end
   end
 
@@ -36,7 +36,7 @@ class TextMessage::Receivers::RegistrationReceiverTest < ActiveSupport::TestCase
     text_message = stub(registration: registration, body: 'Rashid Thomas')
 
     text_message.expects(:respond).with("Thanks! One last question: what's your email address?").once
-    TextMessage::Receivers::RegistrationReceiver.new(text_message).receive
+    TextMessage::Receivable::RegistrationReceiver.new(text_message).receive
     assert_equal 'Rashid Thomas', registration.reload.name
   end
 
@@ -48,7 +48,7 @@ class TextMessage::Receivers::RegistrationReceiverTest < ActiveSupport::TestCase
     assert_difference -> { Member.count }, 1 do
     assert_difference -> { registration.event.attendees.count }, 1 do
     assert_difference -> { Registration.count }, -1 do
-      TextMessage::Receivers::RegistrationReceiver.new(text_message).receive
+      TextMessage::Receivable::RegistrationReceiver.new(text_message).receive
     end
     end
     end

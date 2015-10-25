@@ -1,5 +1,5 @@
-module TextMessage::Receivers
-  class RegistrationReceiver < TextMessage::Receiver
+module TextMessage::Receivable
+  class RegistrationReceiver < Receiver
     delegate :registration, to: :text_message
 
     def self.accept?(text_message)

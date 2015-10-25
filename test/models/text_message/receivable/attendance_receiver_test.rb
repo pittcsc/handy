@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TextMessage::Receivers::AttendanceReceiverTest < ActiveSupport::TestCase
+class TextMessage::Receivable::AttendanceReceiverTest < ActiveSupport::TestCase
   test 'receives with a valid token for an active event' do
     member = members(:michael)
     event = events(:csc_meeting)
@@ -8,7 +8,7 @@ class TextMessage::Receivers::AttendanceReceiverTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Thanks, Michael. You're checked in for CSC Meeting.").once
     assert_difference -> { event.attendees.count }, 1 do
-      TextMessage::Receivers::AttendanceReceiver.new(text_message).receive
+      TextMessage::Receivable::AttendanceReceiver.new(text_message).receive
     end
   end
 
@@ -18,7 +18,7 @@ class TextMessage::Receivers::AttendanceReceiverTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Attendance.count } do
-      TextMessage::Receivers::AttendanceReceiver.new(text_message).receive
+      TextMessage::Receivable::AttendanceReceiver.new(text_message).receive
     end
   end
 
@@ -27,7 +27,7 @@ class TextMessage::Receivers::AttendanceReceiverTest < ActiveSupport::TestCase
 
     text_message.expects(:respond).with("Oops! That doesn't look like a valid event code.").once
     assert_no_difference -> { Attendance.count } do
-      TextMessage::Receivers::AttendanceReceiver.new(text_message).receive
+      TextMessage::Receivable::AttendanceReceiver.new(text_message).receive
     end
   end
 end

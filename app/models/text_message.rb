@@ -1,4 +1,6 @@
 class TextMessage < ActiveRecord::Base
+  include Receivable, Deliverable
+
   enum direction: [:incoming, :outgoing]
 
   before_save :normalize_body
@@ -14,9 +16,9 @@ class TextMessage < ActiveRecord::Base
 
   def process
     if incoming?
-      Receiver.for(self).receive
+      receive
     else
-      Sender.new(self).send
+      send
     end
 
     destroy!

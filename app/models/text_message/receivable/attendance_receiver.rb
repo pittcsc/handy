@@ -1,5 +1,5 @@
-module TextMessage::Receivers
-  class AttendanceReceiver < TextMessage::Receiver
+module TextMessage::Receivable
+  class AttendanceReceiver < Receiver
     def self.accept?(text_message)
       text_message.member.present?
     end

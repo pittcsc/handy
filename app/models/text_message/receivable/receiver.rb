@@ -1,21 +1,9 @@
-class TextMessage::Receiver
+class TextMessage::Receivable::Receiver
   attr_reader :text_message
   delegate :respond, to: :text_message
 
-  def self.for(text_message)
-    class_for(text_message).new(text_message)
-  end
-
-  def self.class_for(text_message)
-    stack.find { |klass| klass.accept?(text_message) }
-  end
-
   def self.accept?(text_message)
     true
-  end
-
-  def self.stack
-    @stack ||= [ TextMessage::Receivers::AttendanceReceiver, TextMessage::Receivers::RegistrationReceiver ]
   end
 
   def initialize(text_message)
