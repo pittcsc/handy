@@ -16,10 +16,14 @@ module TextMessage::Receivable
 
     private
       def start_new_registration
-        with_active_event_by_token do |event|
-          event.registrations.create!(phone_number: text_message.phone_number)
+        with_active_event_by_token do
+          create_registration
           respond "It looks like this is your first time checking in. What's your name?"
         end
+      end
+
+      def create_registration
+        active_event_by_token.registrations.create!(phone_number: text_message.phone_number)
       end
 
       def continue_registration
