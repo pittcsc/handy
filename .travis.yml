@@ -5,10 +5,9 @@ rvm:
 bundler_args: "--without development production --deployment --jobs=3 --retry=3"
 cache: :bundler
 before_script:
-  - mysql -e 'CREATE DATABASE handy_test'
-  - cp config/database.yml.sample config/database.yml
-  - cp config/secrets.yml.sample config/secrets.yml
-  - cp config/twilio.yml.sample config/twilio.yml
+  - psql -c 'create database handy_test;' -U postgres
+env:
+  - TWILIO_ACCOUNT_SID=12345 TWILIO_AUTH_TOKEN=abcdefg
 notifications:
   email: false
   slack:

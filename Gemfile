@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.3'
 
 # Ruby on Rails
 gem 'rails', github: 'rails/rails'
@@ -7,8 +8,7 @@ gem 'arel', github: 'rails/arel'
 gem 'rails-controller-testing'
 
 # Data
-gem 'mysql2'
-gem 'redis'
+gem 'pg'
 
 # Plugins
 gem 'turbolinks'
@@ -20,8 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass'
 
 # Background Jobs
-gem 'resque-pool'
-gem 'resque-scheduler'
+gem 'sucker_punch'
 
 # SMS
 gem 'twilio-ruby'
@@ -31,9 +30,6 @@ gem 'bcrypt'
 
 # PDF Generation
 gem 'wicked_pdf'
-
-# Monitoring
-gem 'easymon', '~> 1.2.3'
 
 group :development do
   gem 'spring'
@@ -50,14 +46,4 @@ end
 group :test do
   gem 'rake'
   gem 'mocha', require: false
-end
-
-group :deployment do
-  gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-rails'
-end
-
-group :production do
-  gem 'unicorn'
 end

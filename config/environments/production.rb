@@ -21,8 +21,8 @@ Rails.application.configure do
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_files = false
+  # Enable Rails's static asset server for Heroku.
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -49,8 +49,8 @@ Rails.application.configure do
   # Prepend all log lines with a request UUID.
   config.log_tags = [:uuid]
 
-  # Use a different logger for distributed setups.
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new('handy'))
+  # Write to Heroku's log stream.
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -81,6 +81,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  config.active_job.queue_adapter = :resque
 end
