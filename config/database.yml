@@ -1,9 +1,7 @@
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: root
-  password:
 
 development:
   <<: *default

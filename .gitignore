@@ -1,8 +1,5 @@
 # Ignore system-specific config.
 /.bundle
-/config/database.yml
-/config/secrets.yml
-/config/twilio.yml
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

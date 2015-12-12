@@ -20,6 +20,4 @@ Rails.application.routes.draw do
   namespace :twilio do
     resources :text_messages
   end
-
-  mount Easymon::Engine, at: 'monitoring/up'
 end
