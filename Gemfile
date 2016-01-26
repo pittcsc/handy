@@ -29,7 +29,7 @@ gem 'twilio-ruby'
 gem 'bcrypt'
 
 # PDF Generation
-gem 'wicked_pdf'
+gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
 
 group :production do
   gem 'thin'
