@@ -10,7 +10,7 @@ class TextMessage::Deliverable::Delivery
 
   def deliver
     client.messages.create \
-      from: Rails.configuration.x.twilio[:phone_number],
+      from: Rails.configuration.x.twilio.phone_number,
       to: @text_message.phone_number,
       body: @text_message.body
   end
