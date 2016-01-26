@@ -31,6 +31,10 @@ gem 'bcrypt'
 # PDF Generation
 gem 'wicked_pdf'
 
+group :production do
+  gem 'thin'
+end
+
 group :development do
   gem 'spring'
 

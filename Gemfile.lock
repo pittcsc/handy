@@ -119,8 +119,10 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+    daemons (1.2.3)
     debug_inspector (0.0.2)
     erubis (2.7.0)
+    eventmachine (1.0.9.1)
     execjs (2.6.0)
     ffi (1.9.10)
     formatador (0.2.5)
@@ -200,6 +202,10 @@ GEM
       sprockets (>= 3.0.0)
     sucker_punch (1.6.0)
       celluloid (~> 0.17.2)
+    thin (1.6.2)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     timers (4.1.1)
@@ -243,6 +249,7 @@ DEPENDENCIES
   rake
   spring
   sucker_punch
+  thin
   turbolinks
   twilio-ruby
   uglifier (>= 1.3.0)
