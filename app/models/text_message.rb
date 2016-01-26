@@ -18,7 +18,7 @@ class TextMessage < ActiveRecord::Base
     if incoming?
       receive
     else
-      send
+      deliver
     end
 
     destroy!
