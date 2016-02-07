@@ -3,8 +3,6 @@ ruby '2.2.3'
 
 # Ruby on Rails
 gem 'rails', github: 'rails/rails'
-gem 'rack', github: 'rack/rack'
-gem 'arel', github: 'rails/arel'
 gem 'rails-controller-testing'
 
 # Data
