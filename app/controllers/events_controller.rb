@@ -47,13 +47,13 @@ class EventsController < ApplicationController
   def activate
     @event.update!(active: true)
 
-    redirect_to :back
+    redirect_back fallback_location: @event
   end
 
   def deactivate
     @event.update!(active: false)
 
-    redirect_to :back
+    redirect_back fallback_location: @event
   end
 
   private
