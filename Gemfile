@@ -11,7 +11,7 @@ gem 'rails-controller-testing'
 gem 'pg'
 
 # Plugins
-gem 'turbolinks'
+gem 'turbolinks', github: 'turbolinks/turbolinks-rails'
 gem 'will_paginate'
 
 # Assets
