@@ -12,7 +12,7 @@ gem 'pg'
 
 # Plugins
 gem 'turbolinks'
-gem 'will_paginate', github: 'kirs/will_paginate', branch: 'fix/i18n-path'
+gem 'will_paginate'
 
 # Assets
 gem 'coffee-rails', '~> 4.1.0'

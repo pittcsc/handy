@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/kirs/will_paginate.git
-  revision: 6bfa7482782c527e6181adc1de0607d5b4730c09
-  branch: fix/i18n-path
-  specs:
-    will_paginate (3.0.4)
-
-GIT
   remote: git://github.com/mileszs/wicked_pdf.git
   revision: d77ed4752ec093e098c3997e21b3bf538e272b3b
   specs:
@@ -234,6 +227,7 @@ GEM
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    will_paginate (3.1.0)
 
 PLATFORMS
   ruby
@@ -260,7 +254,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console
   wicked_pdf!
-  will_paginate!
+  will_paginate
 
 BUNDLED WITH
    1.10.6
